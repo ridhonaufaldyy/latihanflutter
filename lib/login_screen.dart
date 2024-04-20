@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
+import 'package:latihanflutter/home_page.dart';
 import 'register.dart';
 import 'colors.dart';
 
@@ -48,7 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
           SizedBox(height: 20),
           buildPasswordField(),
           SizedBox(height: 30),
-          buildLoginButton(),
+          buildLoginButton(context),
           buildRegisterText(),
         ],
       ),
@@ -128,23 +129,26 @@ Widget buildLoginHeader() {
     );
   }
 
-  Widget buildLoginButton() {
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        backgroundColor: AppColors.blue,
-        foregroundColor: AppColors.White,
-        padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
+Widget buildLoginButton(BuildContext context) {
+  return ElevatedButton(
+    style: ElevatedButton.styleFrom(
+      backgroundColor: AppColors.blue,
+      foregroundColor: AppColors.White,
+      padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8),
       ),
-      onPressed: () {
-        // Tambahkan logika login di sini
-        Navigator.pop(context);
-      },
-      child: Text('Login'),
-    );
-  }
+    ),
+    onPressed: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => HomeScreen()), // Mengarahkan ke halaman login
+      );
+    },
+    child: Text('Login'),
+  );
+}
+
 
   Widget buildRegisterText() {
     return Padding(

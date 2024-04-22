@@ -50,10 +50,10 @@ class _ProfilePageState extends State<ProfilePage> {
                   backgroundImage: NetworkImage('https://via.placeholder.com/150'),
                 ),
                 SizedBox(height: 20),
-                _buildProfileInfo('Nama', 'John Doe'),
-                _buildProfileInfo('Tinggi Badan', '180 cm'),
-                _buildProfileInfo('Berat Badan', '70 kg'),
-                _buildProfileInfo('Umur', '30 tahun'),
+                _buildProfileInfo('Nama', 'Nadia'),
+                _buildProfileInfo('Tinggi Badan', '160 cm'),
+                _buildProfileInfo('Berat Badan', '48 kg'),
+                _buildProfileInfo('Umur', '20 tahun'),
                 SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () {

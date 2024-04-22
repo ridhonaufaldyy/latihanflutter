@@ -8,6 +8,7 @@ import 'mataArticle.dart';
 import 'kakiArticle.dart';
 import 'kamar.dart';
 import 'antrian.dart';
+import 'riwayat.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -137,7 +138,7 @@ Widget _buildServiceSection(BuildContext context) {
           buildStack('Ambulans', Icons.local_hospital, 40.0, context,
               PhoneCallScreen()),
           buildStack('Riwayat', Icons.history, 40.0, context,
-              DaftarPoli(title: 'Riwayat')),
+              CheckupHistoryPage()),
           buildStack('Chat Admin', Icons.chat, 40.0, context,
               ChatAdmin(title: 'Chat Admin')),
         ],

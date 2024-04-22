@@ -28,7 +28,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
         ),
         BottomNavigationBarItem(
           backgroundColor: Colors.black,
-          icon: Icon(Icons.healing, size: 35),
+          icon: Icon(Icons.message, size: 35),
           label: '',
         ),
         BottomNavigationBarItem(

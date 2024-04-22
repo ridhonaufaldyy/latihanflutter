@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:latihanflutter/chatAdmin.dart';
+import 'package:latihanflutter/obat.dart';
 import 'DaftarPoli.dart';
 import 'MyBotNavBar.dart'; // Import file untuk MyBottomNavigationBar
 import 'ambulans.dart';
 import 'mataArticle.dart';
 import 'kakiArticle.dart';
 import 'kamar.dart';
+import 'antrian.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -127,9 +129,9 @@ Widget _buildServiceSection(BuildContext context) {
           buildStack('Daftar', Icons.list, 40.0, context,
               DaftarPoli(title: 'Daftar')),
           buildStack('Pesan Obat', Icons.medical_services, 40.0, context,
-              DaftarPoli(title: 'Pesan Obat')),
+              MedicineSalesPage()),
           buildStack('Antrian', Icons.playlist_add_check, 40.0, context,
-              DaftarPoli(title: 'Antrian')),
+              QueuePage()),
           buildStack('Kamar', Icons.hotel, 40.0, context,
               DashBoardScreenKamar()),
           buildStack('Ambulans', Icons.local_hospital, 40.0, context,

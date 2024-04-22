@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'MyBotNavBar.dart';
-import 'DaftarPoli.dart';
 
 class Pendaftaran extends StatefulWidget {
   const Pendaftaran({super.key});

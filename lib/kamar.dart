@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-// import 'MyBotNavBar.dart';
-// import 'home_page.dart';
+import 'MyBotNavBar.dart';
+import 'kamar1.dart';
+import 'kamar2.dart';
+import 'kamar3.dart';
 
 void main() {
   runApp(MyApp());
@@ -21,57 +23,53 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class DashBoardScreenKamar extends StatefulWidget {
+class DashBoardScreenKamar extends StatelessWidget {
   @override
-  _DashBoardScreenKamarState createState() => _DashBoardScreenKamarState();
+  Widget build(BuildContext context) {
+    return KamarBody();
+  }
 }
 
-class _DashBoardScreenKamarState extends State<DashBoardScreenKamar> {
+class KamarBody extends StatefulWidget {
+  @override
+  _KamarBodyState createState() => _KamarBodyState();
+}
+
+class _KamarBodyState extends State<KamarBody> {
   int _selectedIndex = 0;
 
+  static List<Widget> _widgetOptions = <Widget>[
+    FasilitasScreen(),
+    SearchScreen(),
+    ProfileScreen(),
+  ];
+
   void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+    switch (index) {
+      case 0:
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Kamar1Screen()));
+        break;
+      case 1:
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Kamar2Screen()));
+        break;
+      case 2:
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Kamar3Screen()));
+        break;
+      default:
+        break;
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    Widget currentPage;
-    switch (_selectedIndex) {
-      case 0:
-        currentPage = FasilitasScreen();
-        break;
-      case 1:
-        currentPage = SearchScreen();
-        break;
-      case 2:
-        currentPage = ProfileScreen();
-        break;
-      default:
-        currentPage = FasilitasScreen();
-    }
-
     return Scaffold(
-      body: currentPage,
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.medical_services_outlined),
-            label: 'Obat',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: const Color.fromARGB(255, 226, 243, 33),
-        onTap: _onItemTapped,
+      body: IndexedStack(
+        index: _selectedIndex,
+        children: _widgetOptions,
+      ),
+      bottomNavigationBar: MyBottomNavigationBar(
+        selectedIndex: _selectedIndex,
+        onItemTapped: _onItemTapped,
       ),
     );
   }
@@ -96,40 +94,32 @@ class FasilitasScreen extends StatelessWidget {
               SizedBox(height: 50.0),
               Row(
                 children: [
-                  SizedBox(height: 40.0),
                   IconButton(
                     icon: Icon(Icons.arrow_back_ios_new_rounded),
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
                   ),
-                  SizedBox(width
-                      : 80.0),
-                  Text(
-                    'Kamar',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 23,
-                      fontFamily: 'Kadwa',
-                      fontWeight: FontWeight.w700,
-                      height: 0.05,
-                      letterSpacing: -0.08,
+                  Expanded(
+                    child: Text(
+                      'Kamar',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 23,
+                        fontFamily: 'Kadwa',
+                        fontWeight: FontWeight.w700,
+                      ),
                     ),
                   ),
-                  SizedBox(width: MediaQuery.of(context).size.width * 0.3),
                 ],
               ),
               SizedBox(height: 50.0),
-              buildKamarItem(
-                  context, "assets/img 3.png", "   kelas 1\nNone BPJS"),
+              buildKamarItem(context, "assets/img_3.png", "Kelas 1\nNone BPJS"),
               SizedBox(height: 5.0),
-              buildKamarItem(
-                  context, "assets/img 2.png", "   kelas 2\nBPJS 45%"),
+              buildKamarItem(context, "assets/img_2.png", "Kelas 2\nBPJS 45%"),
               SizedBox(height: 5.0),
-              buildKamarItem(
-                  context, "assets/img 1.png", "   kelas 3\nFull BPJS"),
-              SizedBox(height: 5.0), // Adding space between images
+              buildKamarItem(context, "assets/img_1.png", "Kelas 3\nFull BPJS"),
             ],
           ),
         ),
@@ -165,17 +155,12 @@ class FasilitasScreen extends StatelessWidget {
             Positioned.fill(
               child: Container(
                 decoration: BoxDecoration(
-                  color: Colors.black
-                      .withOpacity(0.5), // Black background with 80% opacity
+                  color: Colors.black.withOpacity(0.5),
                   borderRadius: BorderRadius.circular(10.0),
                 ),
               ),
             ),
             Positioned(
-              top: 0.0,
-              bottom: 0.0,
-              left: 0.0,
-              right: 0.0,
               child: Center(
                 child: Text(
                   text,

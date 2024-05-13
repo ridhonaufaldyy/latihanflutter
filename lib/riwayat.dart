@@ -43,24 +43,24 @@ class _CheckupHistoryPageState extends State<CheckupHistoryPage> {
           padding: EdgeInsets.all(20.0),
           children: [
             CheckupItem(
-              date: 'April 20, 2024',
-              diagnosis: 'Flu',
-              doctor: 'Dr. Smith',
+              Tanggal: 'April 20, 2024',
+              Diagnosa: 'Flu',
+              dokter: 'Dr. Smith',
             ),
             CheckupItem(
-              date: 'April 15, 2024',
-              diagnosis: 'Sore throat',
-              doctor: 'Dr. Johnson',
+              Tanggal: 'April 15, 2024',
+              Diagnosa: 'Sore throat',
+              dokter: 'Dr. Johnson',
             ),
             CheckupItem(
-              date: 'April 10, 2024',
-              diagnosis: 'Fever',
-              doctor: 'Dr. Williams',
+              Tanggal: 'April 10, 2024',
+              Diagnosa: 'Fever',
+              dokter: 'Dr. Williams',
             ),
             CheckupItem(
-              date: 'April 5, 2024',
-              diagnosis: 'Headache',
-              doctor: 'Dr. Brown',
+              Tanggal: 'April 5, 2024',
+              Diagnosa: 'Headache',
+              dokter: 'Dr. Brown',
             ),
           ],
         ),
@@ -78,15 +78,15 @@ class _CheckupHistoryPageState extends State<CheckupHistoryPage> {
 }
 
 class CheckupItem extends StatelessWidget {
-  final String date;
-  final String diagnosis;
-  final String doctor;
+  final String Tanggal;
+  final String Diagnosa;
+  final String dokter;
 
   const CheckupItem({
     Key? key,
-    required this.date,
-    required this.diagnosis,
-    required this.doctor,
+    required this.Tanggal,
+    required this.Diagnosa,
+    required this.dokter,
   }) : super(key: key);
 
   @override
@@ -94,12 +94,12 @@ class CheckupItem extends StatelessWidget {
     return Card(
       elevation: 3,
       child: ListTile(
-        title: Text('Date: $date'),
+        title: Text('Tanggal: $Tanggal'),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Diagnosis: $diagnosis'),
-            Text('Doctor: $doctor'),
+            Text('Diagnosa: $Diagnosa'),
+            Text('dokter: $dokter'),
           ],
         ),
       ),

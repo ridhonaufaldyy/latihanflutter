@@ -53,6 +53,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
             SizedBox(height: 20),
             buildEmailField(),
             SizedBox(height: 20),
+            buildNoTlpField(),
+            SizedBox(height: 20),
             buildUsernameField(),
             SizedBox(height: 20),
             buildPasswordField(),
@@ -156,6 +158,32 @@ class _RegisterScreenState extends State<RegisterScreen> {
         final emailRegex = RegExp(r'\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b', caseSensitive: false);
         if (!emailRegex.hasMatch(value)) {
           return 'Format email tidak valid';
+        }
+        return null;
+      },
+    );
+  }
+
+    Widget buildNoTlpField() {
+    return TextFormField(
+      decoration: InputDecoration(
+        hintText: 'Nomer Telphone',
+        border: UnderlineInputBorder(
+          borderSide: BorderSide(
+            color: AppColors.blue,
+            width: 1,
+          ),
+        ),
+        focusedBorder: UnderlineInputBorder(
+          borderSide: BorderSide(
+            color: AppColors.blue,
+            width: 1,
+          ),
+        ),
+      ),
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'Nomer telphone harus diisi';
         }
         return null;
       },

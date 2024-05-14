@@ -3,10 +3,10 @@ import 'package:latihanflutter/chatAdmin.dart';
 import 'package:latihanflutter/obat.dart';
 import 'DaftarPoli.dart';
 import 'MyBotNavBar.dart'; // Import file untuk MyBottomNavigationBar
-import 'ambulans.dart';
+// import 'ambulans.dart';
 import 'mataArticle.dart';
 import 'kakiArticle.dart';
-import 'kamar.dart';
+// import 'kamar.dart';
 import 'antrian.dart';
 import 'riwayat.dart';
 
@@ -47,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
               _buildProfileInfo(),
               SizedBox(height: 30),
               _buildServiceSection(context),
-              SizedBox(height: 20),
+              SizedBox(height: 10),
               _buildHealthArticlesSection(context),
             ],
           ),
@@ -67,7 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
           'Haloo Nadia!',
           style: TextStyle(fontSize: 24.0),
         ),
-        SizedBox(width: MediaQuery.of(context).size.width * 0.3),
+        SizedBox(width: MediaQuery.of(context).size.width * 0.4),
         Icon(Icons.notifications_rounded),
       ],
     );
@@ -116,30 +116,31 @@ Widget _buildServiceSection(BuildContext context) {
           textAlign: TextAlign.center,
           style: TextStyle(
             color: Colors.black,
-            fontSize: 20,
+            fontSize: 22,
             fontFamily: 'Kadwa',
             fontWeight: FontWeight.w700,
           ),
         ),
       ),
+      SizedBox(height: 20),
       GridView.count(
         crossAxisCount: 4,
         shrinkWrap: true,
         physics: NeverScrollableScrollPhysics(),
         children: [
-          buildStack('Daftar', Icons.list, 40.0, context,
+          buildStack('Daftar', Icons.list, 45.0, context,
               DaftarPoli(title: 'Daftar')),
-          buildStack('Pesan Obat', Icons.medical_services, 40.0, context,
+          buildStack('Pesan Obat', Icons.medical_services, 45.0, context,
               MedicineSalesPage()),
-          buildStack('Antrian', Icons.playlist_add_check, 40.0, context,
+          buildStack('Antrian', Icons.playlist_add_check, 45.0, context,
               QueuePage()),
-          buildStack('Kamar', Icons.hotel, 40.0, context,
-              DashBoardScreenKamar()),
-          buildStack('Ambulans', Icons.local_hospital, 40.0, context,
-              PhoneCallScreen()),
-          buildStack('Riwayat', Icons.history, 40.0, context,
+          // buildStack('Kamar', Icons.hotel, 40.0, context,
+          //     DashBoardScreenKamar()),
+          // buildStack('Ambulans', Icons.local_hospital, 40.0, context,
+          //     PhoneCallScreen()),
+          buildStack('Riwayat', Icons.history, 45.0, context,
               CheckupHistoryPage()),
-          buildStack('Chat Admin', Icons.chat, 40.0, context,
+          buildStack('Chat Admin', Icons.chat, 45.0, context,
               ChatAdmin(title: 'Chat Admin')),
         ],
       ),
@@ -162,9 +163,9 @@ Widget _buildServiceSection(BuildContext context) {
             fontWeight: FontWeight.w700,
           ),
         ),
-        SizedBox(height: 20),
-        _buildKakiHealthArticle(context),
         SizedBox(height: 10),
+        _buildKakiHealthArticle(context),
+        SizedBox(height: 5),
         _buildMataHealthArticle(context),
       ],
     );
@@ -195,7 +196,7 @@ Widget _buildServiceSection(BuildContext context) {
                 ),
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 10),
             Text(
               'Cara Menjaga Kesehatan Kaki',
               textAlign: TextAlign.center,
@@ -206,7 +207,7 @@ Widget _buildServiceSection(BuildContext context) {
                 fontWeight: FontWeight.w700,
               ),
             ),
-            SizedBox(height: 15),
+            SizedBox(height: 10),
             Text(
               'Tips & Tricks Menjaga Kesehatan Kaki',
               textAlign: TextAlign.center,
@@ -259,7 +260,7 @@ Widget _buildServiceSection(BuildContext context) {
                 fontWeight: FontWeight.w700,
               ),
             ),
-            SizedBox(height: 15),
+            SizedBox(height: 10),
             Text(
               'Daftar Buah Yang Bagus Untuk Kesehatan Mata',
               textAlign: TextAlign.center,

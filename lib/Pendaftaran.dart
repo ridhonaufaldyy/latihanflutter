@@ -145,7 +145,7 @@ Widget _FormDaftar(BuildContext context){
                 TableRow(children: [
                   Padding(
                     padding: const EdgeInsets.only(bottom: 10, top: 13),
-                    child: Text('Gejala :'),
+                    child: Text('No Antrian :'),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 10, top: 10),
@@ -166,7 +166,7 @@ Widget _FormDaftar(BuildContext context){
                 TableRow(children: [
                   Padding(
                     padding: const EdgeInsets.only(bottom: 10, top: 5),
-                    child: Text('Usia :'),
+                    child: Text('No Loket :'),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 10),
@@ -187,7 +187,7 @@ Widget _FormDaftar(BuildContext context){
                 TableRow(children: [
                   Padding(
                     padding: const EdgeInsets.only(bottom: 10, top: 5),
-                    child: Text('Tinggi Badan :'),
+                    child: Text('Tujuan:'),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 10),
@@ -208,7 +208,7 @@ Widget _FormDaftar(BuildContext context){
                 TableRow(children: [
                   Padding(
                     padding: const EdgeInsets.only(bottom: 10, top: 5),
-                    child: Text('Berat Badan :'),
+                    child: Text('Tanggal Periksa :'),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 10),

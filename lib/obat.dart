@@ -67,22 +67,22 @@ void _placeOrder() {
           children: [
             MedicineItem(
               name: 'Obat A',
-              price: 50,
+              price: 5000,
               addToCart: _addToCart,
             ),
             MedicineItem(
               name: 'Obat B',
-              price: 80,
+              price: 8000,
               addToCart: _addToCart,
             ),
             MedicineItem(
               name: 'Obat C',
-              price: 120,
+              price: 12000,
               addToCart: _addToCart,
             ),
             MedicineItem(
               name: 'Obat D',
-              price: 200,
+              price: 20000,
               addToCart: _addToCart,
             ),
             SizedBox(height: 20.0),
@@ -90,13 +90,13 @@ void _placeOrder() {
               onPressed: _placeOrder,
               child: Text('Pesan'),
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.green,
+                backgroundColor:  Color.fromRGBO(117, 158, 161, 1),
               ),
             ),
             SizedBox(height: 20.0),
             Container(
               padding: EdgeInsets.all(10),
-              color: Colors.green,
+              color: Color.fromRGBO(117, 158, 161, 1),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

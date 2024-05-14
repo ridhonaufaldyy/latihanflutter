@@ -81,7 +81,7 @@ class _DaftarPoliState extends State<DaftarPoli> {
               ),
             ),
             SizedBox(height: 20), // Jarak antara dua kontainer
-            _buildPoliContainer(context, 'POLI UMUM', 'https://rsbungabangsamedika.com/wp-content/uploads/2019/01/Poli-Umum.jpg'),
+            _buildPoliContainer(context, 'POLI UMUM', 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fpuskpolowijen.malangkota.go.id%2Fpoli-umum%2F&psig=AOvVaw0382UumgLGPLyTUobFUufg&ust=1715688688577000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCIDwhtLMioYDFQAAAAAdAAAAABAE'),
             SizedBox(height: 20), // Jarak antara dua kontainer
             _buildPoliContainer(context, 'POLI GIGI', 'https://th.bing.com/th/id/OIP.5NtKV1WDV2AZCxAA3C3mSgAAAA?rs=1&pid=ImgDetMain'),
             SizedBox(height: 20), // Jarak antara dua kontainer

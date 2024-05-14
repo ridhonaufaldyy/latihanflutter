@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'MyBotNavBar.dart';
+import 'antrianUmum.dart';
+import 'antrianMata.dart';
+import 'antrianGigi.dart';
+import 'antrianKandungan.dart';
 
 void main() {
   runApp(MyApp());
@@ -39,14 +43,90 @@ class _QueuePageState extends State<QueuePage> {
             fit: BoxFit.cover,
           ),
         ),
-        child: ListView(
-          padding: EdgeInsets.symmetric(vertical: 20.0),
-          children: [
-            QueueItem(status: QueueStatus.missed),
-            QueueItem(status: QueueStatus.completed),
-            QueueItem(status: QueueStatus.pending),
-            QueueItem(status: QueueStatus.processing),
-          ],
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  width: 300,
+                  height: 100,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10), // Ini membuat bentuk bulat
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => antrianUmum()),
+                      );
+                    },
+                    child: Text('Antrian Poli Umum'),
+                  ),
+                ),
+                SizedBox(height: 20),
+                Container(
+                  width: 300,
+                  height: 100,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10), // Ini membuat bentuk bulat
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => antrianMata()),
+                      );
+                    },
+                    child: Text('Antrian Poli Mata'),
+                  ),
+                ),
+                SizedBox(height: 20,),
+                Container(
+                  width: 300,
+                  height: 100,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10), // Ini membuat bentuk bulat
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => antrianGigi()),
+                      );
+                    },
+                    child: Text('Antrian Poli Gigi'),
+                  ),
+                ),
+                SizedBox(height: 20),
+                Container(
+                  width: 300,
+                  height: 100,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10), // Ini membuat bentuk bulat
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => antrianKandungan()),
+                      );
+                    },
+                    child: Text('Antrian Poli Kandungan'),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
       bottomNavigationBar: MyBottomNavigationBar(
@@ -56,75 +136,6 @@ class _QueuePageState extends State<QueuePage> {
             _selectedIndex = index;
           });
         },
-      ),
-    );
-  }
-}
-
-enum QueueStatus { missed, completed, pending, processing }
-
-class QueueItem extends StatelessWidget {
-  final QueueStatus status;
-
-  const QueueItem({Key? key, required this.status}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    Color statusColor = Colors.grey;
-    IconData iconData;
-    String statusText;
-
-    switch (status) {
-      case QueueStatus.missed:
-        statusColor = Colors.red;
-        iconData = Icons.error;
-        statusText = 'Terlewat';
-        break;
-      case QueueStatus.completed:
-        statusColor = Colors.green;
-        iconData = Icons.check_circle;
-        statusText = 'Selesai';
-        break;
-      case QueueStatus.pending:
-        statusColor = Colors.orange;
-        iconData = Icons.watch_later;
-        statusText = 'Menunggu';
-        break;
-      case QueueStatus.processing:
-        statusColor = Colors.blue;
-        iconData = Icons.access_time;
-        statusText = 'Diproses';
-        break;
-    }
-
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Container(
-        decoration: BoxDecoration(
-          color: Color.fromARGB(255, 171, 255, 172), // Warna hijau untuk setiap item antrian
-          borderRadius: BorderRadius.circular(10.0),
-        ),
-        child: ListTile(
-          leading: Icon(
-            iconData,
-            color: statusColor,
-          ),
-          title: Text(
-            'Antrian 123',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          subtitle: Text(statusText),
-          trailing: status == QueueStatus.pending
-              ? ElevatedButton(
-                  onPressed: () {
-                    // Tambahkan logika untuk memproses antrian di sini
-                  },
-                  child: Text('Proses'),
-                )
-              : null,
-        ),
       ),
     );
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'MyBotNavBar.dart';
+import 'JanjiTemu.dart';
 
 class Pendaftaran extends StatefulWidget {
   const Pendaftaran({super.key});
@@ -89,7 +90,10 @@ class _PendaftaranState extends State<Pendaftaran> {
                 width: 165,
                 child: ElevatedButton(
                   onPressed: () {
-                    // Add the function to be executed when the button is pressed
+                    Navigator.push(
+                     context,
+                     MaterialPageRoute(builder: (context) => JanjiTemu()),
+                  );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color.fromARGB(255, 39, 126, 167),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:latihanflutter/home_page.dart';
 import 'MyBotNavBar.dart';
 
 void main() => runApp(MyApp());
@@ -25,8 +26,17 @@ class _WaktuTemuState extends State<WaktuTemu> {
   int _selectedIndex = 0;
 
   double _rating = 0;
-  String _name = 'dr. Gavi Pablo';
+  String _name = 'Dr. Afriyan Wahyudhi, Sp.A, M.Kes';
   String _profession = 'Dokter Anak';
+
+  // DateTime _selectedDate = DateTime.now();
+  // TimeOfDay _selectedTime = TimeOfDay.now();
+  String selectedMonth = 'May'; 
+  int selectedYear = DateTime.now().year; 
+  int selectedMonthIndex = 0; 
+  int selectedTimeIndex = 0;
+
+  TextEditingController _notesController = TextEditingController(); // Controller untuk TextField
 
   void _onRatingChanged(double newRating) {
     setState(() {
@@ -61,7 +71,7 @@ class _WaktuTemuState extends State<WaktuTemu> {
                 height: MediaQuery.of(context).size.height * 0.4,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage('assets/strawberry.jpg'), 
+                    image: AssetImage('assets/dokterAnak.png'), 
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -78,10 +88,6 @@ class _WaktuTemuState extends State<WaktuTemu> {
                     SizedBox(height: 20),
                     Row(
                       children: [
-                        // Text(
-                        //   'Rating: ',
-                        //   style: TextStyle(fontSize: 16),
-                        // ),
                         RatingBar(
                           rating: _rating,
                           onRatingChanged: _onRatingChanged,
@@ -89,15 +95,22 @@ class _WaktuTemuState extends State<WaktuTemu> {
                         ),
                       ],
                     ),
-                    SizedBox(height: 20),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
+                        Text(
+                          "Bulan",
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.black.withOpacity(0.6),
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        SizedBox(width: 8),
                         DropdownButton<String>(
-                          value: 'January', // Nilai default bulan
+                          value: selectedMonth,
                           onChanged: (String? newValue) {
                             setState(() {
-                              // Handle perubahan bulan
+                              selectedMonth = newValue!;
                             });
                           },
                           items: <String>[
@@ -120,71 +133,175 @@ class _WaktuTemuState extends State<WaktuTemu> {
                             );
                           }).toList(),
                         ),
+                        SizedBox(width: 20),
+                        Text(
+                          "Tahun",
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.black.withOpacity(0.6),
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        SizedBox(width: 8),
+                        DropdownButton<int>(
+                          value: selectedYear,
+                          onChanged: (int? newValue) {
+                            setState(() {
+                              selectedYear = newValue!;
+                            });
+                          },
+                          items: List.generate(6, (index) => DateTime.now().year + index)
+                              .map<DropdownMenuItem<int>>((int value) {
+                            return DropdownMenuItem<int>(
+                              value: value,
+                              child: Text(value.toString()),
+                            );
+                          }).toList(),
+                        ),
                       ],
                     ),
-                    SizedBox(height: 20),
+                    SizedBox(height: 8),
                     Container(
-                      height: 200, // Adjust height as needed
+                      height: 70,
                       child: ListView.builder(
+                        shrinkWrap: true,
                         scrollDirection: Axis.horizontal,
-                        itemCount: 7, // Example days
+                        itemCount: 6,
                         itemBuilder: (context, index) {
-                          return Container(
-                            width: 100, // Adjust width as needed
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text('${index + 1}'), // Example text
-                                SizedBox(height: 10),
-                                ElevatedButton(
-                                  onPressed: () {
-                                    // Handle date selection
-                                  },
-                                  child: Text('Select'),
-                                ),
-                              ],
+                          return InkWell(
+                            onTap: () {
+                              setState(() {
+                                selectedMonthIndex = index;
+                              });
+                            },
+                            child: Container(
+                              margin: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+                              padding: EdgeInsets.symmetric(vertical: 8, horizontal: 25),
+                              decoration: BoxDecoration(
+                                color: index == selectedMonthIndex ? Color(0xFF0A535A) : Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black12,
+                                    spreadRadius: 4,
+                                    blurRadius: 2,
+                                  ),
+                                ],
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "${index + 8}",
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      color: index == selectedMonthIndex ? Colors.white : Colors.black.withOpacity(0.6),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           );
                         },
                       ),
                     ),
-                    SizedBox(height: 20),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        ElevatedButton(
-                          onPressed: () {
-                            // Handle time selection
-                          },
-                          child: Text('09:00'),
-                        ),
-                        ElevatedButton(
-                          onPressed: () {
-                            // Handle time selection
-                          },
-                          child: Text('10:00'),
-                        ),
-                        ElevatedButton(
-                          onPressed: () {
-                            // Handle time selection
-                          },
-                          child: Text('11:00'),
-                        ),
-                        ElevatedButton(
-                          onPressed: () {
-                            // Handle time selection
-                          },
-                          child: Text('12:00'),
-                        ),
-                      ],
+                    SizedBox(height: 25),
+                    Text(
+                      "Booking Time",
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.black.withOpacity(0.6),
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
-                    SizedBox(height: 20),
-                    ElevatedButton(
-                      onPressed: () {
-                        // Buat janji temu
-                      },
-                      child: Text('Buat Janji Temu'),
+                    SizedBox(height: 8),
+                    Container(
+                      height: 60,
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        scrollDirection: Axis.horizontal,
+                        itemCount: 6,
+                        itemBuilder: (context, index){
+                          bool isSelected = selectedTimeIndex == index;
+                          return InkWell(
+                            onTap: () {
+                              setState(() {
+                                selectedTimeIndex = index;
+                              });
+                            },
+                            child: Container(
+                              margin: EdgeInsets.symmetric(
+                                horizontal: 8,
+                                vertical: 5,
+                              ),
+                              padding: EdgeInsets.symmetric(
+                                vertical: 10,
+                                horizontal: 5,
+                              ),
+                              decoration: BoxDecoration(
+                                color: isSelected ? Color(0xFF0A535A) : Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black12,
+                                    spreadRadius: 4,
+                                    blurRadius: 2,
+                                  ),
+                                ],
+                              ),
+                              child: Center(
+                                child: Text(
+                                  "${index + 6}: 00 PM",
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    color: isSelected ? Colors.white : Colors.black.withOpacity(0.6),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
                     ),
+                    SizedBox(height: 25),
+                    Text(
+                      "Catatan",
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.black.withOpacity(0.6),
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    SizedBox(height: 8),
+                    TextField(
+                      controller: _notesController,
+                      maxLines: 5,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        hintText: 'Tambahkan catatan...',
+                      ),
+                    ),
+                    SizedBox(height: 25),
+                    Center(
+                      child: Container(
+                        width: 200, // Ubah nilai ini untuk menyesuaikan panjang tombol
+                        padding: EdgeInsets.symmetric(vertical: 10.0), // Menambahkan padding vertikal
+                        child: ElevatedButton(
+                          onPressed: () {
+                            // Navigasi ke halaman ....
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => HomeScreen()), // ganti bukan ke page waktuTemu
+                            );
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Color(0xFF0A535A), // Warna latar belakang tombol
+                            foregroundColor: Colors.white,  
+                          ),
+                          child: Text('Buat Janji Temu'),
+                        ),
+                      ),
+                    )
                   ],
                 ),
               ),
@@ -232,3 +349,29 @@ class RatingBar extends StatelessWidget {
     );
   }
 }
+
+// Future<void> _selectDate(BuildContext context) async {
+//   final DateTime? picked = await showDatePicker(
+//     context: context,
+//     initialDate: _selectedDate,
+//     firstDate: DateTime.now(),
+//     lastDate: DateTime(2101),
+//   );
+//   if (picked != null && picked != _selectedDate) {
+//     setState(() {
+//       _selectedDate = picked;
+//     });
+//   }
+// }
+
+// Future<void> _selectTime(BuildContext context) async {
+//   final TimeOfDay? picked = await showTimePicker(
+//     context: context,
+//     initialTime: _selectedTime,
+//   );
+//   if (picked != null && picked != _selectedTime) {
+//     setState(() {
+//       _selectedTime = picked;
+//     });
+//   }
+// }

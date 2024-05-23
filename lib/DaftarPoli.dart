@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'MyBotNavBar.dart';
 import 'Pendaftaran.dart';
+import 'screen/regScreen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -45,7 +46,7 @@ class _DaftarPoliState extends State<DaftarPoli> {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/background.png'),
+            image: const AssetImage('assets/background.png'),
             fit: BoxFit.cover,
             colorFilter: ColorFilter.mode(
               Colors.black.withOpacity(0.4),
@@ -56,10 +57,10 @@ class _DaftarPoliState extends State<DaftarPoli> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start, // Mengubah posisi teks "Daftar POLI"
           children: [
-            SizedBox(height: 40), // Jarak antara atas ke kontainer pertama
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: const Align(
+            const SizedBox(height: 40), // Jarak antara atas ke kontainer pertama
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Align(
                 child: Text(
                   'Daftar POLI',
                   style: TextStyle(
@@ -80,13 +81,13 @@ class _DaftarPoliState extends State<DaftarPoli> {
                 ),
               ),
             ),
-            SizedBox(height: 20), // Jarak antara dua kontainer
+            const SizedBox(height: 20), // Jarak antara dua kontainer
             _buildPoliContainer(context, 'POLI UMUM', 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fpuskpolowijen.malangkota.go.id%2Fpoli-umum%2F&psig=AOvVaw0382UumgLGPLyTUobFUufg&ust=1715688688577000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCIDwhtLMioYDFQAAAAAdAAAAABAE'),
-            SizedBox(height: 20), // Jarak antara dua kontainer
+            const SizedBox(height: 20), // Jarak antara dua kontainer
             _buildPoliContainer(context, 'POLI GIGI', 'https://th.bing.com/th/id/OIP.5NtKV1WDV2AZCxAA3C3mSgAAAA?rs=1&pid=ImgDetMain'),
-            SizedBox(height: 20), // Jarak antara dua kontainer
+            const SizedBox(height: 20), // Jarak antara dua kontainer
             _buildPoliContainer(context, 'POLI MATA', 'https://th.bing.com/th/id/OIP.93un6q2DJQkFbIuBhsFOmgAAAA?rs=1&pid=ImgDetMain'),
-            SizedBox(height: 20), // Jarak antara dua kontainer
+            const SizedBox(height: 20), // Jarak antara dua kontainer
             _buildPoliContainer(context, 'POLI Kandungan', 'https://res.cloudinary.com/dk0z4ums3/image/upload/v1637547406/attached_image/bagaimana-memilih-dokter-kandungan-yang-tepat.jpg'),
           ],
         ),
@@ -117,7 +118,7 @@ Widget _buildPoliContainer(BuildContext context, String poliName, String imagePa
           Center(
             child: Text(
               poliName,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
                 fontSize: 25.0,
@@ -135,7 +136,7 @@ Widget _buildPoliContainer(BuildContext context, String poliName, String imagePa
                   print('Tombol "Pilih" ditekan di $poliName');
                   Navigator.push(
                      context,
-                     MaterialPageRoute(builder: (context) => Pendaftaran()),
+                     MaterialPageRoute(builder: (context) => const RegScreen()),
                   );
                 },
                 style: ElevatedButton.styleFrom(
@@ -144,7 +145,7 @@ Widget _buildPoliContainer(BuildContext context, String poliName, String imagePa
                     borderRadius: BorderRadius.circular(5), 
                   ),
                 ),
-                child: Text(
+                child: const Text(
                   'Pilih',
                   style: TextStyle(
                     color: Colors.white,

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'MyBotNavBar.dart';
 
-class antrianMata extends StatefulWidget {
-  const antrianMata({super.key});
+class AntrianMata extends StatefulWidget {
+  const AntrianMata({super.key});
 
   @override
-  State<antrianMata> createState() => _antrianMataState();
+  State<AntrianMata> createState() => _AntrianMataState();
 }
 
-class _antrianMataState extends State<antrianMata> {
+class _AntrianMataState extends State<AntrianMata> {
   int _selectedIndex = 1;
 
   @override
@@ -49,13 +49,82 @@ class _antrianMataState extends State<antrianMata> {
                 ],
               ),
             ),
+            // Teks "Antrian Sekarang" di luar kotak
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: Text(
+                'Antrian Sekarang',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            // Kotak tambahan di bawah teks "Antrian Sekarang"
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Container(
+                padding: EdgeInsets.all(16.0),
+                width: double.infinity, // Perbesar lebar kotak
+                decoration: BoxDecoration(
+                  color: const Color.fromRGBO(8, 82, 89, 1).withOpacity(0.8),
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center, // Pusatkan konten dalam kolom
+                  children: [
+                    Center( // Pusatkan nomor antrian
+                      child: Text(
+                        '1',
+                        style: TextStyle(
+                          fontSize: 48, // Perbesar ukuran nomor antrian
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 8.0), // Jarak antara nomor antrian dan nama
+                    Center(
+                      child: Text(
+                        'Nama: Budi',
+                        style: TextStyle(
+                          fontSize: 18,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            SizedBox(height: 16.0), // Jarak antara kotak dan teks "Status Antrian"
+            Text(
+              'Status Antrian',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
             Expanded(
               child: ListView(
                 padding: EdgeInsets.symmetric(vertical: 20.0),
                 children: [
-                  QueueItem(status: QueueStatus.missed, queueNumber: 2, patientName: 'Andi'),
-                  QueueItem(status: QueueStatus.pending, queueNumber: 1, patientName: 'Budi'),
-                  QueueItem(status: QueueStatus.processing, queueNumber: 3, patientName: 'Cici'),
+                  QueueItem(
+                    status: QueueStatus.pending,
+                    queueNumber: 1,
+                    patientName: 'Budi',
+                    compact: true,
+                  ),
+                  QueueItem(
+                    status: QueueStatus.missed,
+                    queueNumber: 2,
+                    patientName: 'Andi',
+                    compact: true,
+                  ),
+                  QueueItem(
+                    status: QueueStatus.processing,
+                    queueNumber: 3,
+                    patientName: 'Cici',
+                    compact: true,
+                  ),
                 ],
               ),
             ),
@@ -80,12 +149,14 @@ class QueueItem extends StatelessWidget {
   final QueueStatus status;
   final int queueNumber;
   final String patientName;
+  final bool compact;
 
   const QueueItem({
     Key? key,
     required this.status,
     required this.queueNumber,
     required this.patientName,
+    this.compact = false,
   }) : super(key: key);
 
   @override
@@ -116,7 +187,7 @@ class QueueItem extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Center(
         child: Container(
-          height: 100,
+          height: compact ? 80 : 100, // Perkecil ukuran status antrian
           width: double.infinity,
           decoration: BoxDecoration(
             color: Color.fromRGBO(9, 82, 89, 1), // Warna hijau untuk setiap item antrian
@@ -127,8 +198,8 @@ class QueueItem extends StatelessWidget {
             children: [
               // Kolom kiri untuk nomor antrian yang diperbesar
               Container(
-                height: 100,
-                width: 100,
+                height: compact ? 80 : 100,
+                width: compact ? 80 : 100,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
@@ -140,7 +211,7 @@ class QueueItem extends StatelessWidget {
                   child: Text(
                     '$queueNumber',
                     style: TextStyle(
-                      fontSize: 32,
+                      fontSize: compact ? 24 : 32,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -159,14 +230,14 @@ class QueueItem extends StatelessWidget {
                         style: TextStyle(
                           color: statusColor,
                           fontWeight: FontWeight.bold,
-                          fontSize: 18,
+                          fontSize: compact ? 16 : 18,
                         ),
                       ),
                       Text(
                         'Nama: $patientName',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 18,
+                          fontSize: compact ? 16 : 18,
                         ),
                       ),
                     ],

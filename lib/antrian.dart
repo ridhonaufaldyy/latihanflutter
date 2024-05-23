@@ -81,7 +81,7 @@ class _QueuePageState extends State<QueuePage> {
                           onPressed: () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => antrianUmum()),
+                              MaterialPageRoute(builder: (context) => AntrianUmum()),
                             );
                           },
                           child: Text(
@@ -104,7 +104,7 @@ class _QueuePageState extends State<QueuePage> {
                           onPressed: () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => antrianMata()),
+                              MaterialPageRoute(builder: (context) => AntrianMata()),
                             );
                           },
                           child: Text(
@@ -127,7 +127,7 @@ class _QueuePageState extends State<QueuePage> {
                           onPressed: () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => antrianGigi()),
+                              MaterialPageRoute(builder: (context) => AntrianGigi()),
                             );
                           },
                           child: Text(
@@ -150,7 +150,7 @@ class _QueuePageState extends State<QueuePage> {
                           onPressed: () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => antrianKandungan()),
+                              MaterialPageRoute(builder: (context) => AntrianKandungan()),
                             );
                           },
                           child: Text(

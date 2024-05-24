@@ -148,6 +148,9 @@ class _ChooseScreenState extends State<ChooseScreen> {
                       ),
                     ),
                   ),
+                  Container(
+                    height: 300,
+                  ),
                 ],
               ),
             ),

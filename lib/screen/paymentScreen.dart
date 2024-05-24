@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:latihanflutter/MyBotNavBar.dart';
+import 'package:latihanflutter/screen/succesScreen.dart';
+
 import '../DaftarPoli.dart';
+import '../MyBotNavBar.dart';
+import '../home_page.dart';
+import 'tunaiScreen.dart';
 
 class PaymentScreen extends StatefulWidget {
   final String category;
@@ -22,24 +26,12 @@ class PaymentScreen extends StatefulWidget {
   });
 
   @override
-  _PaymentScreenState createState() => _PaymentScreenState();
+  State<PaymentScreen> createState() => _PaymentScreenState();
 }
 
 class _PaymentScreenState extends State<PaymentScreen> {
-  int _selectedIndex = 0;
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-    // Handle navigation based on index
-    if (index == 0) {
-      // Navigate to Home
-    } else if (index == 1) {
-      // Navigate to another page, if needed
-    }
-  }
-
+  int _selectedIndex = 0; // Indeks halaman profil
+  bool isCallConnected = false;
   @override
   Widget build(BuildContext context) {
     print("doctorName = ${widget.doctorName}");
@@ -54,147 +46,153 @@ class _PaymentScreenState extends State<PaymentScreen> {
           style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
         ),
       ),
-      body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: const AssetImage('assets/background.png'),
-            fit: BoxFit.cover,
-            colorFilter: ColorFilter.mode(
-              Colors.black.withOpacity(0.4),
-              BlendMode.dstATop,
+      body: SingleChildScrollView(
+        child: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: const AssetImage('assets/background.png'),
+              fit: BoxFit.cover,
+              colorFilter: ColorFilter.mode(
+                Colors.black.withOpacity(0.4),
+                BlendMode.dstATop,
+              ),
             ),
           ),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
           child: Padding(
-            padding: const EdgeInsets.only(top: 120.0),
-            child: Column(
-              children: [
-                Container(
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(15)),
-                    color: Color.fromRGBO(217, 217, 217, 1),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Center(
-                          child: Text(
-                            'Health Ease',
-                            style: TextStyle(
-                                fontSize: 12, fontWeight: FontWeight.w600),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 22,
-                        ),
-                        Row(
-                          children: [
-                            const Text('Poli'),
-                            const SizedBox(
-                              width: 12,
+            padding: const EdgeInsets.all(16.0),
+            child: Padding(
+              padding: const EdgeInsets.only(top: 120.0),
+              child: Column(
+                children: [
+                  Container(
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(15)),
+                      color: Color.fromRGBO(217, 217, 217, 1),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Center(
+                            child: Text(
+                              'Rumah Sakit Healthhease',
+                              style: TextStyle(
+                                  fontSize: 12, fontWeight: FontWeight.w600),
                             ),
-                            Text((widget.doctorName == 'Dr. Wafiq Muhaz')
-                                ? 'Mata'
-                                : (widget.doctorName == 'Dr. John Smith')
-                                    ? 'Gigi'
-                                    : 'Umum'),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 12,
-                        ),
-                        Text('Doctor Name: ${widget.doctorName}'),
-                        const SizedBox(
-                          height: 12,
-                        ),
-                        const Text('Tanggal Rujukan: 12 - 5 - 2024'),
-                        const SizedBox(
-                          height: 36,
-                        ),
-                        const Divider(
-                          color: Colors.black,
-                          height: 1,
-                        ),
-                        const SizedBox(
-                          height: 22,
-                        ),
-                        const Center(
-                          child: Text(
-                            'Nomor Antrean',
-                            style: TextStyle(
-                                fontSize: 12, fontWeight: FontWeight.w600),
                           ),
-                        ),
-                        const SizedBox(
-                          height: 12,
-                        ),
-                        const Center(
-                          child: Text(
-                            'Poliklinik',
-                            style: TextStyle(
-                                fontSize: 12, fontWeight: FontWeight.w600),
+                          const SizedBox(
+                            height: 22,
                           ),
-                        ),
-                        const SizedBox(
-                          height: 12,
-                        ),
-                        const Center(
-                          child: Text(
-                            '08',
-                            style: TextStyle(
-                                fontSize: 72, fontWeight: FontWeight.w600),
+                          Row(
+                            children: [
+                              const Text('Poli'),
+                              const SizedBox(
+                                width: 12,
+                              ),
+                              Text(('${widget.doctorName}' == 'Dr. Wafiq Muhaz')
+                                  ? 'Mata'
+                                  : ("${widget.doctorName}" == 'Dr. John Smith')
+                                      ? 'Gigi'
+                                      : 'Umum'),
+                            ],
                           ),
-                        ),
-                        const SizedBox(
-                          height: 42,
-                        ),
-                        Center(
-                          child: ElevatedButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => PaymentScreen(
-                                    category: widget.category,
-                                    name: widget.name,
-                                    phoneNumber: widget.phoneNumber,
-                                    address: widget.address,
-                                    doctorName: widget.doctorName,
-                                    schedule: widget.schedule,
+                          const SizedBox(
+                            height: 12,
+                          ),
+                          // Text('Category: $category'),
+                          Text('Doctor Name: ${widget.doctorName}'),
+                          const SizedBox(
+                            height: 12,
+                          ),
+                          // Text('Phone Number: $phoneNumber'),
+                          const Text('Tanggal Rujukan: 12 - 5 - 2024'),
+                          const SizedBox(
+                            height: 36,
+                          ),
+                          const Divider(
+                            color: Colors.black,
+                            height: 1,
+                          ),
+                          const SizedBox(
+                            height: 22,
+                          ),
+                          const Center(
+                            child: Text(
+                              'nomor Antrean',
+                              style: TextStyle(
+                                  fontSize: 12, fontWeight: FontWeight.w600),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 12,
+                          ),
+                          const Center(
+                            child: Text(
+                              'Poliklinik',
+                              style: TextStyle(
+                                  fontSize: 12, fontWeight: FontWeight.w600),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 12,
+                          ),
+                          const Center(
+                            child: Text(
+                              '08',
+                              style: TextStyle(
+                                  fontSize: 72, fontWeight: FontWeight.w600),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 42,
+                          ),
+                          Center(
+                            child: ElevatedButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => TunaiScreen(),
+                                    // PaymentScreen(
+                                    //   category: widget.category,
+                                    //   name: widget.name,
+                                    //   phoneNumber: widget.phoneNumber,
+                                    //   address: widget.address,
+                                    //   doctorName: widget.doctorName,
+                                    //   schedule: widget.schedule,
+                                    //   // complaint: complaint,
+                                    // ),
                                   ),
-                                ),
-                              );
-                            },
-                            child: const Text('Check In'),
+                                );
+                              },
+                              child: const Text('Tunai'),
+                            ),
                           ),
-                        ),
-                        const SizedBox(
-                          height: 12,
-                        ),
-                        Center(
-                          child: ElevatedButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => DaftarPoli(
-                                    title: 'Daftar Poli',
+                          const SizedBox(
+                            height: 12,
+                          ),
+                          Center(
+                            child: ElevatedButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => SuccessScreen(
+                                      // title: 'Daftar Poli',
+                                    ),
                                   ),
-                                ),
-                              );
-                            },
-                            child: const Text('Cancel'),
+                                );
+                              },
+                              child: const Text('Non-Tunai'),
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
@@ -204,5 +202,30 @@ class _PaymentScreenState extends State<PaymentScreen> {
         onItemTapped: _onItemTapped,
       ),
     );
+  }
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+
+    switch (index) {
+      case 0:
+        // Navigasi ke halaman Home
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => HomeScreen()));
+        break;
+      case 1:
+        // Navigasi ke halaman Medical Services
+        Navigator.pushNamed(context, '/medical_services');
+        break;
+      case 2:
+        // Navigasi ke halaman Healing
+        Navigator.pushNamed(context, '/healing');
+        break;
+      case 3:
+        // Tidak perlu melakukan navigasi karena sudah berada di halaman Profile
+        break;
+    }
   }
 }

@@ -1,21 +1,35 @@
 import 'package:flutter/material.dart';
 import 'MyBotNavBar.dart';
-import 'suksesPembayaran.dart'; // import file suksesPembayaran.dart
-import 'package:latihanflutter/screen/paymentScreen.dart';
 
-class PaymentScreen extends StatefulWidget {
-  // tambahkan properti yang diperlukan
-  @override
-  _PaymentScreenState createState() => _PaymentScreenState();
+void main() {
+  runApp(MyApp());
 }
 
-class _PaymentScreenState extends State<PaymentScreen> {
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Pembayaran Sukses',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: SuccessPage(),
+    );
+  }
+}
+
+class SuccessPage extends StatefulWidget {
+  @override
+  _SuccessPageState createState() => _SuccessPageState();
+}
+
+class _SuccessPageState extends State<SuccessPage> {
   int _selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
@@ -49,16 +63,12 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 ),
               ),
               SizedBox(height: 10),
-              ElevatedButton(
-                onPressed: () {
-                  // Navigasi ke halaman sukses pembayaran
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => PaymentScreen()),
-                  );
-                },
-                child: Text('Lihat Antrian'), // Ubah teks tombol
-              ),
+              // ElevatedButton(
+              //   onPressed: () {
+              //     // Ganti dengan navigasi ke halaman yang sesuai
+              //   },
+              //   child: Text('Lihat Antrian'), // Ubah teks tombol
+              // ),
             ],
           ),
         ),

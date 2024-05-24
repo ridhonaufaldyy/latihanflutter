@@ -158,44 +158,44 @@ class _TunaiScreenState extends State<TunaiScreen> {
                     ),
                   ),
                   const SizedBox(
-                    height: 32,
+                    height: 350,
                   ),
-                  ElevatedButton(
-                    style: const ButtonStyle(
-                      backgroundColor: MaterialStatePropertyAll(
-                        Color.fromRGBO(9, 82, 89, 1),
-                      ),
-                    ),
-                    onPressed: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => PaymentScreen(
-                      //       category: widget.category,
-                      //       name: widget.name,
-                      //       phoneNumber: widget.phoneNumber,
-                      //       address: widget.address,
-                      //       doctorName: widget.doctorName,
-                      //       schedule: widget.schedule,
-                      //       // complaint: complaint,
-                      //     ),
-                      //   ),
-                      // );
+                  // ElevatedButton(
+                  //   style: const ButtonStyle(
+                  //     backgroundColor: MaterialStatePropertyAll(
+                  //       Color.fromRGBO(9, 82, 89, 1),
+                  //     ),
+                  //   ),
+                  //   onPressed: () {
+                  //     // Navigator.push(
+                  //     //   context,
+                  //     //   MaterialPageRoute(
+                  //     //     builder: (context) => PaymentScreen(
+                  //     //       category: widget.category,
+                  //     //       name: widget.name,
+                  //     //       phoneNumber: widget.phoneNumber,
+                  //     //       address: widget.address,
+                  //     //       doctorName: widget.doctorName,
+                  //     //       schedule: widget.schedule,
+                  //     //       // complaint: complaint,
+                  //     //     ),
+                  //     //   ),
+                  //     // );
 
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ChooseScreen(),
-                        ),
-                      );
-                    },
-                    child: const Text(
-                      'Lanjutkan',
-                      style: TextStyle(
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
+                  //     Navigator.push(
+                  //       context,
+                  //       MaterialPageRoute(
+                  //         builder: (context) => ChooseScreen(),
+                  //       ),
+                  //     );
+                  //   },
+                  //   child: const Text(
+                  //     'Lanjutkan',
+                  //     style: TextStyle(
+                  //       color: Colors.white,
+                  //     ),
+                  //   ),
+                  // ),
                 ],
               ),
             ),

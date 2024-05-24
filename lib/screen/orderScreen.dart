@@ -179,6 +179,9 @@ class _OrderScreenState extends State<OrderScreen> {
                       ),
                     ),
                   ),
+                  Container(
+                    height: 350,
+                  ),
                 ],
               ),
             ),

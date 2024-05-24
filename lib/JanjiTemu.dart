@@ -280,8 +280,8 @@ class SectionTitle extends StatelessWidget {
                 decoration: TextDecoration.underline,
                 color: colorScheme.secondary,
               ),
+            ),
           ),
-        ),
       ],
     );
   }

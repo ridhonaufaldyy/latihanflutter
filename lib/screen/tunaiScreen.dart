@@ -1,35 +1,17 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import '../MyBotNavBar.dart';
 import '../home_page.dart';
-import 'paymentScreen.dart';
+import 'choseeScreen.dart';
 
-class OrderScreen extends StatefulWidget {
-  final String category;
-  final String name;
-  final String phoneNumber;
-  final String address;
-  final String doctorName;
-  final String schedule;
-  final String complaint;
-
-  OrderScreen({
-    required this.category,
-    required this.name,
-    required this.phoneNumber,
-    required this.address,
-    required this.doctorName,
-    required this.schedule,
-    required this.complaint,
-  });
+class TunaiScreen extends StatefulWidget {
+  const TunaiScreen({super.key});
 
   @override
-  State<OrderScreen> createState() => _OrderScreenState();
+  State<TunaiScreen> createState() => _TunaiScreenState();
 }
 
-class _OrderScreenState extends State<OrderScreen> {
+class _TunaiScreenState extends State<TunaiScreen> {
   int _selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
@@ -39,10 +21,6 @@ class _OrderScreenState extends State<OrderScreen> {
         backgroundColor: Colors.transparent,
         elevation: 0.0,
         centerTitle: true,
-        title: const Text(
-          "Pemesanan",
-          style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
-        ),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -59,64 +37,93 @@ class _OrderScreenState extends State<OrderScreen> {
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Padding(
-              padding: const EdgeInsets.only(top: 120.0),
+              padding: const EdgeInsets.only(top: 24.0),
               child: Column(
                 children: [
                   Container(
-                    decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(15)),
-                      color: Color.fromRGBO(217, 217, 217, 1),
-                    ),
                     child: Padding(
                       padding: const EdgeInsets.all(12.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Center(
-                            child: Text(
-                              'Detail Pasien',
-                              style: TextStyle(
-                                  fontSize: 12, fontWeight: FontWeight.w600),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 22,
-                          ),
-                          Text('Nama Pasien: ${widget.name}'),
-                          const SizedBox(
-                            height: 12,
-                          ),
-                          // Text('Category: $category'),
-                          Text('Doctor Name: ${widget.doctorName}'),
-                          const SizedBox(
-                            height: 12,
-                          ),
-                          // Text('Phone Number: $phoneNumber'),
-                          Text('Schedule: ${widget.schedule}'),
-                          const SizedBox(
-                            height: 62,
-                          ),
-                          const Center(
-                            child: Text(
-                              'Tagihan',
-                              style: TextStyle(
-                                fontSize: 12,
+                          Center(
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(
+                                  12,
+                                ),
+                                color: Colors.grey,
+                              ),
+                              width: MediaQuery.of(context).size.width * 0.5,
+                              child: const Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Center(
+                                  child: Text(
+                                    'Pembayaran Tunai',
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                ),
                               ),
                             ),
                           ),
                           const SizedBox(
                             height: 22,
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              const Text('Konsultasi dokter'),
-                              Text(('${widget.doctorName}' == 'Dr. Wafiq Muhaz')
-                                  ? 'Rp.935000'
-                                  : ("${widget.doctorName}" == 'Dr. John Smith')
-                                      ? 'Rp.35000'
-                                      : 'Rp.50000'),
-                            ],
+                          Center(
+                            child: Container(
+                              width: MediaQuery.of(context).size.width * 0.5,
+                              child: Image.asset(
+                                'assets/barcode.png',
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 12,
+                          ),
+                          // Text('Category: $category'),
+                          // Text('Doctor Name: ${widget.doctorName}'),
+                          const SizedBox(
+                            height: 12,
+                          ),
+                          // Text('Phone Number: $phoneNumber'),
+                          // Text('Schedule: ${widget.schedule}'),
+                          const SizedBox(
+                            height: 62,
+                          ),
+                          const Center(
+                            child: Text(
+                              'Total Pembayaran',
+                              style: TextStyle(
+                                fontSize: 16,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 22,
+                          ),
+                          Center(
+                            child: Container(
+                              width: MediaQuery.of(context).size.width * 0.5,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(
+                                  12,
+                                ),
+                                color: Colors.greenAccent,
+                              ),
+                              child: const Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Center(
+                                  child: Text(
+                                    "35.000",
+                                    style: TextStyle(
+                                      fontSize: 22,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
                           ),
                           // const Text('Konsultasi dokter: 35000'),
                           const SizedBox(
@@ -129,20 +136,23 @@ class _OrderScreenState extends State<OrderScreen> {
                           const SizedBox(
                             height: 22,
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          const Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text('Total'),
-                              Text(('${widget.doctorName}' == 'Dr. Wafiq Muhaz')
-                                  ? 'Rp.935000'
-                                  : ("${widget.doctorName}" == 'Dr. John Smith')
-                                      ? 'Rp.35000'
-                                      : 'Rp.50000'),
+                              Text(
+                                " Silakan pilih metode pembayaran berikut :",
+                              ),
+                              Text(
+                                "1. Tunjukan Bill Pembayaran Ke Administrasi",
+                              ),
+                              Text(
+                                "2. Bayar Sesuai Dengan Bill Pembayaran Ke Administrasi",
+                              ),
+                              Text(
+                                "3. Pembayaran Telah Selesai",
+                              ),
                             ],
                           ),
-                          // const Text('Total: 35000'),
-                          // Text('Address: $address'),
-                          // Text('Complaint: $complaint'),
                         ],
                       ),
                     ),
@@ -157,18 +167,25 @@ class _OrderScreenState extends State<OrderScreen> {
                       ),
                     ),
                     onPressed: () {
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //     builder: (context) => PaymentScreen(
+                      //       category: widget.category,
+                      //       name: widget.name,
+                      //       phoneNumber: widget.phoneNumber,
+                      //       address: widget.address,
+                      //       doctorName: widget.doctorName,
+                      //       schedule: widget.schedule,
+                      //       // complaint: complaint,
+                      //     ),
+                      //   ),
+                      // );
+
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => PaymentScreen(
-                            category: widget.category,
-                            name: widget.name,
-                            phoneNumber: widget.phoneNumber,
-                            address: widget.address,
-                            doctorName: widget.doctorName,
-                            schedule: widget.schedule,
-                            // complaint: complaint,
-                          ),
+                          builder: (context) => ChooseScreen(),
                         ),
                       );
                     },

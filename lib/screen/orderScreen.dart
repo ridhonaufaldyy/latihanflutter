@@ -179,6 +179,9 @@ class _OrderScreenState extends State<OrderScreen> {
                       ),
                     ),
                   ),
+                  const SizedBox(
+                    height: 350,
+                  ),
                 ],
               ),
             ),

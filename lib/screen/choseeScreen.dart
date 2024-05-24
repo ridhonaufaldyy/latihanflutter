@@ -48,64 +48,67 @@ class _ChooseScreenState extends State<ChooseScreen> {
                   Container(
                     child: Padding(
                       padding: const EdgeInsets.all(12.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          _buildRadioButtons(),
-
-                          // const Text('Konsultasi dokter: 35000'),
-                          const SizedBox(
-                            height: 22,
-                          ),
-                          const Divider(
-                            color: Colors.black,
-                            height: 1,
-                          ),
-                          const SizedBox(
-                            height: 22,
-                          ),
-                           Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                " Silakan lakukan pembayaran",
-                              ),
-                              SizedBox(
-                                height: 12,
-                              ),
-                              Text(
-                                "Total",
-                              ),
-                              SizedBox(
-                                height: 12,
-                              ),
-                              Center(
-                                child: Container(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.5,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(
-                                      12,
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 22.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            _buildRadioButtons(),
+                        
+                            // const Text('Konsultasi dokter: 35000'),
+                            const SizedBox(
+                              height: 22,
+                            ),
+                            const Divider(
+                              color: Colors.black,
+                              height: 1,
+                            ),
+                            const SizedBox(
+                              height: 22,
+                            ),
+                             Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  " Silakan lakukan pembayaran",
+                                ),
+                                SizedBox(
+                                  height: 12,
+                                ),
+                                Text(
+                                  "Total",
+                                ),
+                                SizedBox(
+                                  height: 12,
+                                ),
+                                Center(
+                                  child: Container(
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.5,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(
+                                        12,
+                                      ),
+                                      color: Colors.greenAccent,
                                     ),
-                                    color: Colors.greenAccent,
-                                  ),
-                                  child: const Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: Center(
-                                      child: Text(
-                                        "35.000",
-                                        style: TextStyle(
-                                          fontSize: 22,
-                                          color: Colors.white,
+                                    child: const Padding(
+                                      padding: EdgeInsets.all(8.0),
+                                      child: Center(
+                                        child: Text(
+                                          "35.000",
+                                          style: TextStyle(
+                                            fontSize: 22,
+                                            color: Colors.white,
+                                          ),
                                         ),
                                       ),
                                     ),
                                   ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        ],
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -147,6 +150,9 @@ class _ChooseScreenState extends State<ChooseScreen> {
                         color: Colors.white,
                       ),
                     ),
+                  ),
+                  SizedBox(
+                    height: 300,
                   ),
                 ],
               ),

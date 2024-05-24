@@ -4,6 +4,7 @@ import 'package:latihanflutter/screen/succesScreen.dart';
 import '../DaftarPoli.dart';
 import '../MyBotNavBar.dart';
 import '../home_page.dart';
+import 'choseeScreen.dart';
 import 'tunaiScreen.dart';
 
 class PaymentScreen extends StatefulWidget {
@@ -178,9 +179,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => SuccessScreen(
-                                      // title: 'Daftar Poli',
+                                    builder: (context) => ChooseScreen(
                                     ),
+
                                   ),
                                 );
                               },
@@ -190,6 +191,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
                         ],
                       ),
                     ),
+                  ),
+                  Container(
+                    height: 350,
                   ),
                 ],
               ),

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'login_screen.dart';
 import 'colors.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -11,6 +13,49 @@ class RegisterScreen extends StatefulWidget {
 class _RegisterScreenState extends State<RegisterScreen> {
   final _formKey = GlobalKey<FormState>(); // Digunakan untuk mengelola form
   bool _obscurePassword = true;
+  String _name = '';
+  String _nik = '';
+  String _email = '';
+  String _phoneNumber = '';
+  String _username = '';
+  String _password = '';
+
+  Future<void> registerUser() async {
+    final url = Uri.parse('http://10.0.2.2:8000/users/'); // Ganti dengan URL API Anda
+
+    final response = await http.post(
+      url,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: jsonEncode({
+        'name': _name,
+        'nik': _nik,
+        'email': _email,
+        'phone_number': _phoneNumber,
+        'username': _username,
+        'password': _password,
+      }),
+    );
+
+    print('Response status: ${response.statusCode}');
+    print('Response body: ${response.body}');
+
+    if (response.statusCode == 201) {
+      // Berhasil
+      print('User registered successfully');
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => LoginScreen()),
+      );
+    } else {
+      // Gagal
+      print('Failed to register user: ${response.body}');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Failed to register: ${response.body}')),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -104,6 +149,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
         }
         return null;
       },
+      onSaved: (value) {
+        _name = value!;
+      },
     );
   }
 
@@ -129,6 +177,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
           return 'NIK harus diisi';
         }
         return null;
+      },
+      onSaved: (value) {
+        _nik = value!;
       },
     );
   }
@@ -161,10 +212,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
         }
         return null;
       },
+      onSaved: (value) {
+        _email = value!;
+      },
     );
   }
 
-    Widget buildNoTlpField() {
+  Widget buildNoTlpField() {
     return TextFormField(
       decoration: InputDecoration(
         hintText: 'Nomer Telphone',
@@ -186,6 +240,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
           return 'Nomer telphone harus diisi';
         }
         return null;
+      },
+      onSaved: (value) {
+        _phoneNumber = value!;
       },
     );
   }
@@ -212,6 +269,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
           return 'Username harus diisi';
         }
         return null;
+      },
+      onSaved: (value) {
+        _username = value!;
       },
     );
   }
@@ -251,6 +311,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
         }
         return null;
       },
+      onSaved: (value) {
+        _password = value!;
+      },
     );
   }
 
@@ -259,16 +322,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
       style: ElevatedButton.styleFrom(
         backgroundColor: AppColors.accentColor,
         foregroundColor: AppColors.White,
-        padding: EdgeInsets.symmetric(horizontal: 100, vertical: 15),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
+        minimumSize: Size(double.infinity, 50),
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
       ),
       onPressed: () {
-        // Validasi form sebelum melakukan aksi registrasi
-        if (_formKey.currentState!.validate()) {
-          // Tambahkan logika registrasi di sini
-          print('Registrasi berhasil');
+        if (_formKey.currentState?.validate() ?? false) {
+          _formKey.currentState?.save();
+          registerUser();
         }
       },
       child: Text('Daftar'),
@@ -277,7 +337,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   Widget buildLoginText(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(top: 10, bottom: 0),
+      padding: EdgeInsets.only(top: 20),
       child: RichText(
         text: TextSpan(
           text: 'Sudah punya akun? ',
@@ -287,10 +347,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
           ),
           children: [
             TextSpan(
-              text: 'Login',
+              text: 'Masuk',
               style: TextStyle(
-                color: AppColors.blue,
+                color: AppColors.accentColor,
                 fontSize: 14,
+                fontWeight: FontWeight.bold,
               ),
               recognizer: TapGestureRecognizer()
                 ..onTap = () {

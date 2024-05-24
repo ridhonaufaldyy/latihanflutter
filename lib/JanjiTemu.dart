@@ -168,7 +168,7 @@ class DoctorListTile extends StatelessWidget {
             children: [
               Icon(
                 Icons.star,
-                color: Colors.yellow,
+                color: Color(0xFF095259),
                 size: 16,
               ),
               const SizedBox(width: 4),
@@ -280,8 +280,8 @@ class SectionTitle extends StatelessWidget {
                 decoration: TextDecoration.underline,
                 color: colorScheme.secondary,
               ),
-            ),
           ),
+        ),
       ],
     );
   }

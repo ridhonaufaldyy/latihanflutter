@@ -2,12 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:latihanflutter/MyBotNavBar.dart';
 
 import 'orderScreen.dart';
-
-// import '../widgets/RegistrationButtonWidget.dart';
-// import '../widgets/radioButtonWidget.dart';
-// import 'orderScreen.dart';
 
 class RegScreen extends StatefulWidget {
   const RegScreen({Key? key}) : super(key: key);
@@ -17,6 +14,7 @@ class RegScreen extends StatefulWidget {
 }
 
 class _RegScreenState extends State<RegScreen> {
+  int _selectedIndex = 0;
   int _selectedTimeSlot = 0;
   String? _selectedCategory;
   String? _selectedDoctor;
@@ -26,12 +24,26 @@ class _RegScreenState extends State<RegScreen> {
   final TextEditingController _addressController = TextEditingController();
   final TextEditingController _complaintController = TextEditingController();
 
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+    // Handle navigation based on index
+    if (index == 0) {
+      // Navigate to Home
+    } else if (index == 1) {
+      // Navigate to another page, if needed
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     String _dataSelectedDoctor = _selectedDoctor ?? "";
     String _dataSelectedCategory = _selectedCategory ?? "";
     return Scaffold(
       body: Container(
+        width: double.infinity,
+        height: double.infinity,
         decoration: BoxDecoration(
           image: DecorationImage(
             image: const AssetImage('assets/background.png'),
@@ -406,6 +418,14 @@ class _RegScreenState extends State<RegScreen> {
             ),
           ),
         ),
+      ),
+      bottomNavigationBar: MyBottomNavigationBar(
+        selectedIndex: _selectedIndex,
+        onItemTapped: (index) {
+          setState(() {
+            _selectedIndex = index;
+          });
+        },
       ),
     );
   }

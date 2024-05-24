@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-
+import 'package:latihanflutter/MyBotNavBar.dart';
 import '../DaftarPoli.dart';
 
-class PaymentScreen extends StatelessWidget {
+class PaymentScreen extends StatefulWidget {
   final String category;
   final String name;
   final String phoneNumber;
@@ -22,8 +22,27 @@ class PaymentScreen extends StatelessWidget {
   });
 
   @override
+  _PaymentScreenState createState() => _PaymentScreenState();
+}
+
+class _PaymentScreenState extends State<PaymentScreen> {
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+    // Handle navigation based on index
+    if (index == 0) {
+      // Navigate to Home
+    } else if (index == 1) {
+      // Navigate to another page, if needed
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    print("doctorName = $doctorName");
+    print("doctorName = ${widget.doctorName}");
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -64,7 +83,7 @@ class PaymentScreen extends StatelessWidget {
                       children: [
                         const Center(
                           child: Text(
-                            'Rumah Sakit Healthhease',
+                            'Health Ease',
                             style: TextStyle(
                                 fontSize: 12, fontWeight: FontWeight.w600),
                           ),
@@ -78,9 +97,9 @@ class PaymentScreen extends StatelessWidget {
                             const SizedBox(
                               width: 12,
                             ),
-                            Text(('$doctorName' == 'Dr. Wafiq Muhaz')
+                            Text((widget.doctorName == 'Dr. Wafiq Muhaz')
                                 ? 'Mata'
-                                : ("$doctorName" == 'Dr. John Smith')
+                                : (widget.doctorName == 'Dr. John Smith')
                                     ? 'Gigi'
                                     : 'Umum'),
                           ],
@@ -88,12 +107,10 @@ class PaymentScreen extends StatelessWidget {
                         const SizedBox(
                           height: 12,
                         ),
-                        // Text('Category: $category'),
-                        Text('Doctor Name: $doctorName'),
+                        Text('Doctor Name: ${widget.doctorName}'),
                         const SizedBox(
                           height: 12,
                         ),
-                        // Text('Phone Number: $phoneNumber'),
                         const Text('Tanggal Rujukan: 12 - 5 - 2024'),
                         const SizedBox(
                           height: 36,
@@ -107,7 +124,7 @@ class PaymentScreen extends StatelessWidget {
                         ),
                         const Center(
                           child: Text(
-                            'nomor Antrean',
+                            'Nomor Antrean',
                             style: TextStyle(
                                 fontSize: 12, fontWeight: FontWeight.w600),
                           ),
@@ -142,13 +159,12 @@ class PaymentScreen extends StatelessWidget {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => PaymentScreen(
-                                    category: category,
-                                    name: name,
-                                    phoneNumber: phoneNumber,
-                                    address: address,
-                                    doctorName: doctorName,
-                                    schedule: schedule,
-                                    // complaint: complaint,
+                                    category: widget.category,
+                                    name: widget.name,
+                                    phoneNumber: widget.phoneNumber,
+                                    address: widget.address,
+                                    doctorName: widget.doctorName,
+                                    schedule: widget.schedule,
                                   ),
                                 ),
                               );
@@ -182,6 +198,10 @@ class PaymentScreen extends StatelessWidget {
             ),
           ),
         ),
+      ),
+      bottomNavigationBar: MyBottomNavigationBar(
+        selectedIndex: _selectedIndex,
+        onItemTapped: _onItemTapped,
       ),
     );
   }

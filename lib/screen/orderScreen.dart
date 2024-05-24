@@ -1,10 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-
+import 'package:latihanflutter/MyBotNavBar.dart';
 import 'paymentScreen.dart';
 
-class OrderScreen extends StatelessWidget {
+class OrderScreen extends StatefulWidget {
   final String category;
   final String name;
   final String phoneNumber;
@@ -22,6 +21,19 @@ class OrderScreen extends StatelessWidget {
     required this.schedule,
     required this.complaint,
   });
+
+  @override
+  _OrderScreenState createState() => _OrderScreenState();
+}
+
+class _OrderScreenState extends State<OrderScreen> {
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +62,7 @@ class OrderScreen extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Padding(
-            padding: const EdgeInsets.only(top:120.0),
+            padding: const EdgeInsets.only(top: 120.0),
             child: Column(
               children: [
                 Container(
@@ -73,17 +85,17 @@ class OrderScreen extends StatelessWidget {
                         const SizedBox(
                           height: 22,
                         ),
-                        Text('Nama Pasien: $name'),
+                        Text('Nama Pasien: ${widget.name}'),
                         const SizedBox(
                           height: 12,
                         ),
-                        // Text('Category: $category'),
-                        Text('Doctor Name: $doctorName'),
+                        // Text('Category: ${widget.category}'),
+                        Text('Nama Dokter: ${widget.doctorName}'),
                         const SizedBox(
                           height: 12,
                         ),
-                        // Text('Phone Number: $phoneNumber'),
-                        Text('Schedule: $schedule'),
+                        // Text('Phone Number: ${widget.phoneNumber}'),
+                        Text('Schedule: ${widget.schedule}'),
                         const SizedBox(
                           height: 62,
                         ),
@@ -102,14 +114,13 @@ class OrderScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             const Text('Konsultasi dokter'),
-                            Text(('$doctorName' == 'Dr. Wafiq Muhaz')
+                            Text((widget.doctorName == 'Dr. Wafiq Muhaz')
                                 ? 'Rp.935000'
-                                : ("$doctorName" == 'Dr. John Smith')
+                                : (widget.doctorName == 'Dr. John Smith')
                                     ? 'Rp.35000'
                                     : 'Rp.50000'),
                           ],
                         ),
-                        // const Text('Konsultasi dokter: 35000'),
                         const SizedBox(
                           height: 22,
                         ),
@@ -124,16 +135,13 @@ class OrderScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             const Text('Total'),
-                            Text(('$doctorName' == 'Dr. Wafiq Muhaz')
+                            Text((widget.doctorName == 'Dr. Wafiq Muhaz')
                                 ? 'Rp.935000'
-                                : ("$doctorName" == 'Dr. John Smith')
+                                : (widget.doctorName == 'Dr. John Smith')
                                     ? 'Rp.35000'
                                     : 'Rp.50000'),
                           ],
                         ),
-                        // const Text('Total: 35000'),
-                        // Text('Address: $address'),
-                        // Text('Complaint: $complaint'),
                       ],
                     ),
                   ),
@@ -152,13 +160,13 @@ class OrderScreen extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) => PaymentScreen(
-                          category: category,
-                          name: name,
-                          phoneNumber: phoneNumber,
-                          address: address,
-                          doctorName: doctorName,
-                          schedule: schedule,
-                          // complaint: complaint,
+                          category: widget.category,
+                          name: widget.name,
+                          phoneNumber: widget.phoneNumber,
+                          address: widget.address,
+                          doctorName: widget.doctorName,
+                          schedule: widget.schedule,
+                          // complaint: widget.complaint,
                         ),
                       ),
                     );
@@ -174,6 +182,10 @@ class OrderScreen extends StatelessWidget {
             ),
           ),
         ),
+      ),
+      bottomNavigationBar: MyBottomNavigationBar(
+        selectedIndex: _selectedIndex,
+        onItemTapped: _onItemTapped,
       ),
     );
   }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'MyBotNavBar.dart';
+import '../MyBotNavBar.dart';
 
 void main() {
   runApp(MyApp());

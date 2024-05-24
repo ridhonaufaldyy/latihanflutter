@@ -15,6 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Healty Ease',
       home: HomePage(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }

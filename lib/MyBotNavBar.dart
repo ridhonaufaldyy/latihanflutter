@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:latihanflutter/JanjiTemu.dart';
 import 'package:latihanflutter/home_page.dart';
 import 'package:latihanflutter/obat.dart';
 import 'profilePage.dart';
@@ -25,12 +26,12 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
         ),
         BottomNavigationBarItem(
           backgroundColor: Colors.black,
-          icon: Icon(Icons.medical_services, size: 35),
+          icon: Icon(Icons.shopping_cart, size: 35),
           label: '',
         ),
         BottomNavigationBarItem(
           backgroundColor: Colors.black,
-          icon: Icon(Icons.message, size: 35),
+          icon: Icon(Icons.medical_services, size: 35),
           label: '',
         ),
         BottomNavigationBarItem(
@@ -61,7 +62,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
           case 2:
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => ProfilePage()), // Panggil constructor ProfilePage
+              MaterialPageRoute(builder: (context) => JanjiTemu()), // Panggil constructor ProfilePage
             );            break;
           case 3:
             Navigator.push(

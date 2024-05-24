@@ -122,15 +122,16 @@ class _ChooseScreenState extends State<ChooseScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => SuccessScreen( //PaymentScreen(
-                            // category: widget.category,
-                            // name: widget.name,
-                            // phoneNumber: widget.phoneNumber,
-                            // address: widget.address,
-                            // doctorName: widget.doctorName,
-                            // schedule: widget.schedule,
-                            // complaint: complaint,
-                          ),
+                          builder: (context) => SuccessPage()
+                          // SuccessScreen( //PaymentScreen(
+                          //   // category: widget.category,
+                          //   // name: widget.name,
+                          //   // phoneNumber: widget.phoneNumber,
+                          //   // address: widget.address,
+                          //   // doctorName: widget.doctorName,
+                          //   // schedule: widget.schedule,
+                          //   // complaint: complaint,
+                          // ),
                         ),
                       );
 

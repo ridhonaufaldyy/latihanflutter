@@ -2,9 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
-import 'package:latihanflutter/MyBotNavBar.dart';
 
+import '../MyBotNavBar.dart';
+import '../home_page.dart';
 import 'orderScreen.dart';
+
+// import '../widgets/RegistrationButtonWidget.dart';
+// import '../widgets/radioButtonWidget.dart';
+// import 'orderScreen.dart';
 
 class RegScreen extends StatefulWidget {
   const RegScreen({Key? key}) : super(key: key);
@@ -24,26 +29,18 @@ class _RegScreenState extends State<RegScreen> {
   final TextEditingController _addressController = TextEditingController();
   final TextEditingController _complaintController = TextEditingController();
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-    // Handle navigation based on index
-    if (index == 0) {
-      // Navigate to Home
-    } else if (index == 1) {
-      // Navigate to another page, if needed
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     String _dataSelectedDoctor = _selectedDoctor ?? "";
     String _dataSelectedCategory = _selectedCategory ?? "";
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0.0,
+        centerTitle: true,
+      ),
       body: Container(
-        width: double.infinity,
-        height: double.infinity,
         decoration: BoxDecoration(
           image: DecorationImage(
             image: const AssetImage('assets/background.png'),
@@ -57,377 +54,401 @@ class _RegScreenState extends State<RegScreen> {
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                const Center(
-                  child: Text(
-                    'Pendaftaran',
-                    style: TextStyle(
-                      fontSize: 26,
-                      fontWeight: FontWeight.bold,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 24.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  const Center(
+                    child: Text(
+                      'Pendaftaran',
+                      style: TextStyle(
+                        fontSize: 26,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
-                ),
-                const SizedBox(height: 16),
-                Container(
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(15)),
-                    color: Color.fromRGBO(217, 217, 217, 1),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Column(
-                      children: [
-                        Row(
-                          children: [
-                            const Expanded(
-                              flex: 1,
-                              child: Text(
-                                "Kategori Daftar",
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 12,
-                            ),
-                            Expanded(
-                              flex: 2,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(
-                                    12,
-                                  ),
-                                  color: const Color.fromRGBO(9, 82, 89, 1),
+                  const SizedBox(height: 16),
+                  Container(
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(15)),
+                      color: Color.fromRGBO(217, 217, 217, 1),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              const Expanded(
+                                flex: 1,
+                                child: Text(
+                                  "Kategori Daftar",
                                 ),
-                                child: DropdownButtonFormField<String>(
-                                  iconEnabledColor: Colors.white,
-                                  value: _selectedCategory,
-                                  decoration: const InputDecoration(
-                                    labelText: 'Kategori Daftar',
-                                    border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(12))),
-                                    labelStyle: TextStyle(
-                                        color: Colors
-                                            .grey), // Set label text color
-                                    hintStyle: TextStyle(
-                                        color:
-                                            Colors.grey), // Set hint text color
+                              ),
+                              const SizedBox(
+                                width: 12,
+                              ),
+                              Expanded(
+                                flex: 2,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(
+                                      12,
+                                    ),
+                                    color: const Color.fromRGBO(9, 82, 89, 1),
                                   ),
-                                  items: ['Umum', 'BPJS', 'Asuransi']
-                                      .map((label) => DropdownMenuItem(
-                                            value: label,
-                                            child: Text(
-                                              label,
-                                              style: const TextStyle(
-                                                color: Colors.grey,
+                                  child: DropdownButtonFormField<String>(
+                                    iconEnabledColor: Colors.white,
+                                    value: _selectedCategory,
+                                    decoration: const InputDecoration(
+                                      labelText: 'Kategori Daftar',
+                                      border: OutlineInputBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(12))),
+                                      labelStyle: TextStyle(
+                                          color: Colors
+                                              .grey), // Set label text color
+                                      hintStyle: TextStyle(
+                                          color:
+                                              Colors.grey), // Set hint text color
+                                    ),
+                                    items: ['Umum', 'BPJS', 'Asuransi']
+                                        .map((label) => DropdownMenuItem(
+                                              value: label,
+                                              child: Text(
+                                                label,
+                                                style: const TextStyle(
+                                                  color: Colors.grey,
+                                                ),
                                               ),
-                                            ),
-                                          ))
-                                      .toList(),
-                                  onChanged: (value) {
-                                    setState(() {
-                                      _selectedCategory = value!;
-                                    });
-                                  },
+                                            ))
+                                        .toList(),
+                                    onChanged: (value) {
+                                      setState(() {
+                                        _selectedCategory = value!;
+                                      });
+                                    },
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 12,
-                        ),
-                        Row(
-                          children: [
-                            const Expanded(
-                              flex: 1,
-                              child: Text(
-                                "Nama",
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 12,
-                            ),
-                            Expanded(
-                              flex: 2,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(
-                                    12,
-                                  ),
-                                  color: const Color.fromRGBO(9, 82, 89, 1),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 12,
+                          ),
+                          Row(
+                            children: [
+                              const Expanded(
+                                flex: 1,
+                                child: Text(
+                                  "Nama",
                                 ),
-                                child: TextFormField(
-                                  style: const TextStyle(
-                                    color: Colors.grey,
+                              ),
+                              const SizedBox(
+                                width: 12,
+                              ),
+                              Expanded(
+                                flex: 2,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(
+                                      12,
+                                    ),
+                                    color: const Color.fromRGBO(9, 82, 89, 1),
                                   ),
-                                  controller: _nameController,
-                                  decoration: const InputDecoration(
-                                    labelText: 'Nama',
-                                    labelStyle: TextStyle(color: Colors.grey),
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(
-                                          12,
+                                  child: TextFormField(
+                                    style: const TextStyle(
+                                      color: Colors.grey,
+                                    ),
+                                    controller: _nameController,
+                                    decoration: const InputDecoration(
+                                      labelText: 'Nama',
+                                      labelStyle: TextStyle(color: Colors.grey),
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(
+                                            12,
+                                          ),
                                         ),
                                       ),
                                     ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 12,
-                        ),
-                        Row(
-                          children: [
-                            const Expanded(
-                              flex: 1,
-                              child: Text(
-                                "No. Telpon",
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 12,
-                            ),
-                            Expanded(
-                              flex: 2,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(
-                                    12,
-                                  ),
-                                  color: const Color.fromRGBO(9, 82, 89, 1),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 12,
+                          ),
+                          Row(
+                            children: [
+                              const Expanded(
+                                flex: 1,
+                                child: Text(
+                                  "No. Telpon",
                                 ),
-                                child: TextFormField(
-                                  keyboardType: TextInputType.phone,
-                                  style: const TextStyle(
-                                    color: Colors.grey,
+                              ),
+                              const SizedBox(
+                                width: 12,
+                              ),
+                              Expanded(
+                                flex: 2,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(
+                                      12,
+                                    ),
+                                    color: const Color.fromRGBO(9, 82, 89, 1),
                                   ),
-                                  controller: _phoneController,
-                                  decoration: const InputDecoration(
-                                    hintStyle: TextStyle(color: Colors.white),
-                                    labelText: '+628xxx',
-                                    labelStyle: TextStyle(
+                                  child: TextFormField(
+                                    keyboardType: TextInputType.phone,
+                                    style: const TextStyle(
                                       color: Colors.grey,
                                     ),
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(
-                                          12,
+                                    controller: _phoneController,
+                                    decoration: const InputDecoration(
+                                      hintStyle: TextStyle(color: Colors.white),
+                                      labelText: '+628xxx',
+                                      labelStyle: TextStyle(
+                                        color: Colors.grey,
+                                      ),
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(
+                                            12,
+                                          ),
                                         ),
                                       ),
                                     ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 12,
-                        ),
-                        Row(
-                          children: [
-                            const Expanded(
-                              flex: 1,
-                              child: Text(
-                                "Alamat",
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 12,
-                            ),
-                            Expanded(
-                              flex: 2,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(
-                                    12,
-                                  ),
-                                  color: const Color.fromRGBO(9, 82, 89, 1),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 12,
+                          ),
+                          Row(
+                            children: [
+                              const Expanded(
+                                flex: 1,
+                                child: Text(
+                                  "Alamat",
                                 ),
-                                child: TextFormField(
-                                  style: const TextStyle(
-                                    color: Colors.grey,
+                              ),
+                              const SizedBox(
+                                width: 12,
+                              ),
+                              Expanded(
+                                flex: 2,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(
+                                      12,
+                                    ),
+                                    color: const Color.fromRGBO(9, 82, 89, 1),
                                   ),
-                                  controller: _addressController,
-                                  decoration: const InputDecoration(
-                                    labelText: 'Alamat',
-                                    labelStyle: TextStyle(
+                                  child: TextFormField(
+                                    style: const TextStyle(
                                       color: Colors.grey,
                                     ),
-                                    border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                      Radius.circular(
-                                        12,
+                                    controller: _addressController,
+                                    decoration: const InputDecoration(
+                                      labelText: 'Alamat',
+                                      labelStyle: TextStyle(
+                                        color: Colors.grey,
                                       ),
-                                    )),
+                                      border: OutlineInputBorder(
+                                          borderRadius: BorderRadius.all(
+                                        Radius.circular(
+                                          12,
+                                        ),
+                                      )),
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 12,
-                        ),
-                        Row(
-                          children: [
-                            const Expanded(
-                              flex: 1,
-                              child: Text(
-                                "Nama Dokter",
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 12,
-                            ),
-                            Expanded(
-                              flex: 2,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(
-                                    12,
-                                  ),
-                                  color: const Color.fromRGBO(9, 82, 89, 1),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 12,
+                          ),
+                          Row(
+                            children: [
+                              const Expanded(
+                                flex: 1,
+                                child: Text(
+                                  "Nama Dokter",
                                 ),
-                                child: DropdownButtonFormField<String>(
-                                  iconEnabledColor: Colors.white,
-                                  decoration: const InputDecoration(
-                                    labelText: 'Nama Dokter',
-                                    border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(12))),
-                                    labelStyle: TextStyle(
-                                        color: Colors
-                                            .grey), // Set label text color
-                                    hintStyle: TextStyle(
-                                        color:
-                                            Colors.grey), // Set hint text color
+                              ),
+                              const SizedBox(
+                                width: 12,
+                              ),
+                              Expanded(
+                                flex: 2,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(
+                                      12,
+                                    ),
+                                    color: const Color.fromRGBO(9, 82, 89, 1),
                                   ),
-                                  value: _selectedDoctor,
-                                  items: [
-                                    'Dr. Ridho Naufaldy',
-                                    'Dr. Wafiq Muhaz',
-                                    'Dr. John Smith'
-                                  ]
-                                      .map((label) => DropdownMenuItem(
-                                            value: label,
-                                            child: Text(
-                                              label,
-                                              style: const TextStyle(
-                                                color: Colors.grey,
+                                  child: DropdownButtonFormField<String>(
+                                    iconEnabledColor: Colors.white,
+                                    decoration: const InputDecoration(
+                                      labelText: 'Nama Dokter',
+                                      border: OutlineInputBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(12))),
+                                      labelStyle: TextStyle(
+                                          color: Colors
+                                              .grey), // Set label text color
+                                      hintStyle: TextStyle(
+                                          color:
+                                              Colors.grey), // Set hint text color
+                                    ),
+                                    value: _selectedDoctor,
+                                    items: [
+                                      'Dr. Ridho Naufaldy',
+                                      'Dr. Wafiq Muhaz',
+                                      'Dr. John Smith'
+                                    ]
+                                        .map((label) => DropdownMenuItem(
+                                              value: label,
+                                              child: Text(
+                                                label,
+                                                style: const TextStyle(
+                                                  color: Colors.grey,
+                                                ),
                                               ),
-                                            ),
-                                          ))
-                                      .toList(),
-                                  onChanged: (value) {
-                                    setState(() {
-                                      _selectedDoctor = value!;
-                                    });
-                                  },
+                                            ))
+                                        .toList(),
+                                    onChanged: (value) {
+                                      setState(() {
+                                        _selectedDoctor = value!;
+                                      });
+                                    },
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 12,
-                        ),
-                        const Center(
-                          child: Text(
-                            'Pilih Jadwal',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 12,
+                          ),
+                          const Center(
+                            child: Text(
+                              'Pilih Jadwal',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
-                        ),
-                        RadioList(
-                          selectedTimeSlot: _selectedTimeSlot,
-                          onChanged: (int? value) {
-                            setState(() {
-                              _selectedTimeSlot = value!;
-                            });
-                          },
-                        ),
-                        const SizedBox(
-                          height: 12,
-                        ),
-                        Row(
-                          children: [
-                            const Expanded(
-                              flex: 1,
-                              child: Text(
-                                "Keluhan",
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 12,
-                            ),
-                            Expanded(
-                              flex: 2,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(
-                                    12,
-                                  ),
-                                  color: const Color.fromRGBO(9, 82, 89, 1),
+                          RadioList(
+                            selectedTimeSlot: _selectedTimeSlot,
+                            onChanged: (int? value) {
+                              setState(() {
+                                _selectedTimeSlot = value!;
+                              });
+                            },
+                          ),
+                          const SizedBox(
+                            height: 12,
+                          ),
+                          Row(
+                            children: [
+                              const Expanded(
+                                flex: 1,
+                                child: Text(
+                                  "Keluhan",
                                 ),
-                                child: TextFormField(
-                                  style: const TextStyle(
-                                    color: Colors.grey,
+                              ),
+                              const SizedBox(
+                                height: 12,
+                              ),
+                              Expanded(
+                                flex: 2,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(
+                                      12,
+                                    ),
+                                    color: const Color.fromRGBO(9, 82, 89, 1),
                                   ),
-                                  controller: _complaintController,
-                                  decoration: const InputDecoration(
-                                    labelStyle: TextStyle(
+                                  child: TextFormField(
+                                    style: const TextStyle(
                                       color: Colors.grey,
                                     ),
-                                    labelText: '......',
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(
-                                          12,
+                                    controller: _complaintController,
+                                    decoration: const InputDecoration(
+                                      labelStyle: TextStyle(
+                                        color: Colors.grey,
+                                      ),
+                                      labelText: '......',
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(
+                                            12,
+                                          ),
                                         ),
                                       ),
                                     ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                      ],
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                RegistrationNext(
-                  selectedCategory: _dataSelectedCategory,
-                  name: _nameController.text,
-                  phoneNumber: _phoneController.text,
-                  address: _addressController.text,
-                  doctorName: _dataSelectedDoctor,
-                  schedule: timeSlots[_selectedTimeSlot],
-                  complaint: _complaintController.text,
-                ),
-              ],
+                  RegistrationNext(
+                    selectedCategory: _dataSelectedCategory,
+                    name: _nameController.text,
+                    phoneNumber: _phoneController.text,
+                    address: _addressController.text,
+                    doctorName: _dataSelectedDoctor,
+                    schedule: timeSlots[_selectedTimeSlot],
+                    complaint: _complaintController.text,
+                  ),
+                ],
+              ),
             ),
           ),
         ),
       ),
       bottomNavigationBar: MyBottomNavigationBar(
         selectedIndex: _selectedIndex,
-        onItemTapped: (index) {
-          setState(() {
-            _selectedIndex = index;
-          });
-        },
+        onItemTapped: _onItemTapped,
       ),
     );
+  }
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+
+    switch (index) {
+      case 0:
+        // Navigasi ke halaman Home
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => HomeScreen()));
+        break;
+      case 1:
+        // Navigasi ke halaman Medical Services
+        Navigator.pushNamed(context, '/medical_services');
+        break;
+      case 2:
+        // Navigasi ke halaman Healing
+        Navigator.pushNamed(context, '/healing');
+        break;
+      case 3:
+        // Tidak perlu melakukan navigasi karena sudah berada di halaman Profile
+        break;
+    }
   }
 }
 

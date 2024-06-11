@@ -167,14 +167,14 @@ class _QueuePageState extends State<QueuePage> {
           ),
         ),
       ),
-      bottomNavigationBar: MyBottomNavigationBar(
-        selectedIndex: _selectedIndex,
-        onItemTapped: (index) {
-          setState(() {
-            _selectedIndex = index;
-          });
-        },
-      ),
+      // bottomNavigationBar: MyBottomNavigationBar(
+      //   selectedIndex: _selectedIndex,
+      //   onItemTapped: (index) {
+      //     setState(() {
+      //       _selectedIndex = index;
+      //     });
+      //   },
+      // ),
     );
   }
 }

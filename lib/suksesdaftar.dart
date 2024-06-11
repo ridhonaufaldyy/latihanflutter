@@ -73,14 +73,14 @@ class _SuccessPageState extends State<SuccessPage> {
           ),
         ),
       ),
-      bottomNavigationBar: MyBottomNavigationBar(
-        selectedIndex: _selectedIndex,
-        onItemTapped: (index) {
-          setState(() {
-            _selectedIndex = index;
-          });
-        },
-      ),
+      // bottomNavigationBar: MyBottomNavigationBar(
+      //   selectedIndex: _selectedIndex,
+      //   onItemTapped: (index) {
+      //     setState(() {
+      //       _selectedIndex = index;
+      //     });
+      //   },
+      // ),
     );
   }
 }

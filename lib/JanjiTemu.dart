@@ -79,14 +79,14 @@ class _JanjiTemuState extends State<JanjiTemu> {
           ],
         ),
       ),
-      bottomNavigationBar: MyBottomNavigationBar(
-        selectedIndex: _selectedIndex,
-        onItemTapped: (index) {
-          setState(() {
-            _selectedIndex = index;
-          });
-        },
-      ),
+      // bottomNavigationBar: MyBottomNavigationBar(
+      //   selectedIndex: _selectedIndex,
+      //   onItemTapped: (index) {
+      //     setState(() {
+      //       _selectedIndex = index;
+      //     });
+      //   },
+      // ),
     );
   }
 

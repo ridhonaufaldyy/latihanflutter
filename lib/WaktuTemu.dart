@@ -260,10 +260,10 @@ class _WaktuTemuState extends State<WaktuTemu> {
                         child: ElevatedButton(
                           onPressed: () {
                             // Navigasi ke halaman ....
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => HomeScreen()), // ganti bukan ke page waktuTemu
-                            );
+                            // Navigator.push(
+                            //   context,
+                            //   MaterialPageRoute(builder: (context) => HomeScreen()), // ganti bukan ke page waktuTemu
+                            // );
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Color(0xFF0A535A), 
@@ -280,14 +280,14 @@ class _WaktuTemuState extends State<WaktuTemu> {
           ),
         ),
       ),
-      bottomNavigationBar: MyBottomNavigationBar(
-        selectedIndex: _selectedIndex,
-        onItemTapped: (index) {
-          setState(() {
-            _selectedIndex = index;
-          });
-        },
-      ),
+      // bottomNavigationBar: MyBottomNavigationBar(
+      //   selectedIndex: _selectedIndex,
+      //   onItemTapped: (index) {
+      //     setState(() {
+      //       _selectedIndex = index;
+      //     });
+      //   },
+      // ),
     );
   }
 

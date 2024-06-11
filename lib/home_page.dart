@@ -1,27 +1,73 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:latihanflutter/chatAdmin.dart';
-import 'package:latihanflutter/obat.dart';
+import 'package:http/http.dart' as http;
 import 'DaftarPoli.dart';
-import 'MyBotNavBar.dart'; // Import file untuk MyBottomNavigationBar
-// import 'ambulans.dart';
-import 'mataArticle.dart';
-import 'kakiArticle.dart';
-// import 'kamar.dart';
+import 'MyBotNavBar.dart';
 import 'antrian.dart';
 import 'riwayat.dart';
+import 'chatAdmin.dart';
+import 'obat.dart';
 
 class HomeScreen extends StatefulWidget {
+  final int userId;
+  final String token;
+
+  HomeScreen({
+    required this.userId,
+    required this.token,
+  });
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
+  String fullName = '';
+  String nik = '';
+  bool isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchUserData();
+  }
 
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
+  }
+
+  Future<void> fetchUserData() async {
+    final url = Uri.parse('http://127.0.0.1:8000/get_users/${widget.userId}');
+    print('Fetching data from $url');
+
+    final response = await http.get(
+      url,
+      headers: {
+        'Authorization': 'Bearer ${widget.token}',
+        'Content-Type': 'application/json',
+      },
+    );
+
+    print('Response status: ${response.statusCode}');
+    print('Response body: ${response.body}');
+
+    if (response.statusCode == 200) {
+      final responseData = jsonDecode(response.body);
+      setState(() {
+        fullName = responseData['fullname'];
+        nik = responseData['nik'];
+        isLoading = false;
+      });
+      print('Full name: $fullName, NIK: $nik');
+    } else {
+      print('Failed to fetch user data: ${response.body}');
+      setState(() {
+        isLoading = false;
+      });
+    }
   }
 
   @override
@@ -30,32 +76,34 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: Text('Home'),
       ),
-      body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/background.png'),
-            fit: BoxFit.cover,
-          ),
-        ),
-        padding: EdgeInsets.all(20.0),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _buildGreetings(context),
-              SizedBox(height: 20),
-              _buildProfileInfo(),
-              SizedBox(height: 30),
-              _buildServiceSection(context),
-              SizedBox(height: 10),
-              _buildHealthArticlesSection(context),
-            ],
-          ),
-        ),
-      ),
+      body: isLoading
+          ? Center(child: CircularProgressIndicator())
+          : Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/background.png'),
+                  fit: BoxFit.cover,
+                ),
+              ),
+              padding: EdgeInsets.all(20.0),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _buildGreetings(context),
+                    SizedBox(height: 20),
+                    _buildProfileInfo(),
+                    SizedBox(height: 30),
+                    _buildServiceSection(context),
+                  ],
+                ),
+              ),
+            ),
       bottomNavigationBar: MyBottomNavigationBar(
         selectedIndex: _selectedIndex,
         onItemTapped: _onItemTapped,
+        userId: widget.userId,
+        token: widget.token,
       ),
     );
   }
@@ -64,10 +112,10 @@ class _HomeScreenState extends State<HomeScreen> {
     return Row(
       children: [
         Text(
-          'Haloo Nadia!',
+          fullName.isNotEmpty ? 'Halo $fullName!' : 'Loading...',
           style: TextStyle(fontSize: 24.0),
         ),
-        SizedBox(width: MediaQuery.of(context).size.width * 0.4),
+        Spacer(),
         Icon(Icons.notifications_rounded),
       ],
     );
@@ -85,7 +133,7 @@ class _HomeScreenState extends State<HomeScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Nadia Aprilianl',
+            '$fullName',
             style: TextStyle(fontSize: 13.0),
           ),
           SizedBox(height: 2),
@@ -96,7 +144,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           SizedBox(height: 2),
           Text(
-            '32710928778299',
+            '$nik',
             style: TextStyle(fontSize: 13.0),
           ),
         ],
@@ -104,176 +152,48 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-Widget _buildServiceSection(BuildContext context) {
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      SizedBox(
-        width: 130,
-        height: 23,
-        child: Text(
-          'Pelayanan',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 22,
-            fontFamily: 'Kadwa',
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-      ),
-      SizedBox(height: 20),
-      GridView.count(
-        crossAxisCount: 4,
-        shrinkWrap: true,
-        physics: NeverScrollableScrollPhysics(),
-        children: [
-          buildStack('Daftar', Icons.list, 45.0, context,
-              DaftarPoli(title: 'Daftar')),
-          buildStack('Pesan Obat', Icons.medical_services, 45.0, context,
-              MedicineSalesPage()),
-          buildStack('Antrian', Icons.playlist_add_check, 45.0, context,
-              QueuePage()),
-          // buildStack('Kamar', Icons.hotel, 40.0, context,
-          //     DashBoardScreenKamar()),
-          // buildStack('Ambulans', Icons.local_hospital, 40.0, context,
-          //     PhoneCallScreen()),
-          buildStack('Riwayat', Icons.history, 45.0, context,
-              CheckupHistoryPage()),
-          buildStack('Chat Admin', Icons.chat, 45.0, context,
-              ChatAdmin(title: 'Chat Admin')),
-        ],
-      ),
-    ],
-  );
-}
-
-  Widget _buildHealthArticlesSection(BuildContext context) {
+  Widget _buildServiceSection(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(height: 20),
-        Text(
-          'Artikel Kesehatan',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 20,
-            fontFamily: 'Kadwa',
-            fontWeight: FontWeight.w700,
+        SizedBox(
+          width: 130,
+          height: 23,
+          child: Text(
+            'Pelayanan',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 22,
+              fontFamily: 'Kadwa',
+              fontWeight: FontWeight.w700,
+            ),
           ),
         ),
-        SizedBox(height: 10),
-        _buildKakiHealthArticle(context),
-        SizedBox(height: 5),
-        _buildMataHealthArticle(context),
+        SizedBox(height: 20),
+        GridView.count(
+          crossAxisCount: 4,
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
+          children: [
+            buildStack('Daftar', Icons.list, 45.0, context,
+                DaftarPoli(
+                  userId: widget.userId,
+                  token : widget.token,)),
+            buildStack('Pesan Obat', Icons.medical_services, 45.0, context,
+                MedicineSalesPage(
+                  userId: widget.userId,
+                  token : widget.token,
+                )),
+            buildStack('Antrian', Icons.playlist_add_check, 45.0, context,
+                QueuePage()),
+            buildStack('Riwayat', Icons.history, 45.0, context,
+                CheckupHistoryPage()),
+            buildStack('Chat Admin', Icons.chat, 45.0, context,
+                ChatAdmin(title: 'Chat Admin')),
+          ],
+        ),
       ],
-    );
-  }
-
-  Widget _buildKakiHealthArticle(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        // Navigasi ke halaman artikel kaki
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => ArticleKakiScreen()),
-        );
-      },
-      child: Container(
-        padding: EdgeInsets.all(20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              width: double.infinity,
-              height: 100,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10.0),
-                image: DecorationImage(
-                  image: AssetImage('assets/60514791.png'),
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-            SizedBox(height: 10),
-            Text(
-              'Cara Menjaga Kesehatan Kaki',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 16,
-                fontFamily: 'Kadwa',
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-            SizedBox(height: 10),
-            Text(
-              'Tips & Tricks Menjaga Kesehatan Kaki',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 12,
-                fontFamily: 'Kaisei Decol',
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildMataHealthArticle(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        // Navigasi ke halaman artikel mata
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => ArticleMataScreen()),
-        );
-      },
-      child: Container(
-        padding: EdgeInsets.all(20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              width: double.infinity,
-              height: 100,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10.0),
-                image: DecorationImage(
-                  image: AssetImage('assets/60514791.png'),
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-            SizedBox(height: 20),
-            Text(
-              'Tips Menjaga Kesehatan Mata',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 16,
-                fontFamily: 'Kadwa',
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-            SizedBox(height: 10),
-            Text(
-              'Daftar Buah Yang Bagus Untuk Kesehatan Mata',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 12,
-                fontFamily: 'Kaisei Decol',
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-          ],
-        ),
-      ),
     );
   }
 

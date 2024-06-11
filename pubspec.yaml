@@ -30,8 +30,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  http : ^1.2.1
-
+  http: ^1.2.1
 
   # Tambahkan carousel_slider ke dependencies
   carousel_slider: ^4.2.1

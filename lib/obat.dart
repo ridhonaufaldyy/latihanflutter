@@ -14,12 +14,23 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MedicineSalesPage(),
+      home: MedicineSalesPage(
+        userId: 1, // Contoh userId
+        token: 'your_token', // Contoh token
+      ),
     );
   }
 }
 
 class MedicineSalesPage extends StatefulWidget {
+  final int userId;
+  final String token;
+
+  MedicineSalesPage({
+    required this.userId,
+    required this.token,
+  });
+
   @override
   _MedicineSalesPageState createState() => _MedicineSalesPageState();
 }
@@ -36,18 +47,17 @@ class _MedicineSalesPageState extends State<MedicineSalesPage> {
     });
   }
 
-void _placeOrder() {
-  Navigator.push(
-    context,
-    MaterialPageRoute(
-      builder: (context) => NextPage(
-        orderedMedicines: _orderedMedicines,
-        totalPrice: _totalPrice,
+  void _placeOrder() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => NextPage(
+          orderedMedicines: _orderedMedicines,
+          totalPrice: _totalPrice,
+        ),
       ),
-    ),
-  );
-}
-
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -148,6 +158,8 @@ void _placeOrder() {
             _selectedIndex = index;
           });
         },
+        userId: widget.userId,
+        token: widget.token,
       ),
     );
   }

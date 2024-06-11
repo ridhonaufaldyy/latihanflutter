@@ -67,10 +67,10 @@ class _KamarBodyState extends State<KamarBody> {
         index: _selectedIndex,
         children: _widgetOptions,
       ),
-      bottomNavigationBar: MyBottomNavigationBar(
-        selectedIndex: _selectedIndex,
-        onItemTapped: _onItemTapped,
-      ),
+      // bottomNavigationBar: MyBottomNavigationBar(
+      //   selectedIndex: _selectedIndex,
+      //   onItemTapped: _onItemTapped,
+      // ),
     );
   }
 }

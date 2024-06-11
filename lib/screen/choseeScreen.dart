@@ -158,10 +158,10 @@ class _ChooseScreenState extends State<ChooseScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: MyBottomNavigationBar(
-        selectedIndex: _selectedIndex,
-        onItemTapped: _onItemTapped,
-      ),
+      // bottomNavigationBar: MyBottomNavigationBar(
+      //   selectedIndex: _selectedIndex,
+      //   onItemTapped: _onItemTapped,
+      // ),
     );
   }
 
@@ -173,8 +173,8 @@ class _ChooseScreenState extends State<ChooseScreen> {
     switch (index) {
       case 0:
         // Navigasi ke halaman Home
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => HomeScreen()));
+        // Navigator.push(
+        //     context, MaterialPageRoute(builder: (context) => HomeScreen()));
         break;
       case 1:
         // Navigasi ke halaman Medical Services

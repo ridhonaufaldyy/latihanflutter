@@ -201,10 +201,10 @@ class _PaymentScreenState extends State<PaymentScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: MyBottomNavigationBar(
-        selectedIndex: _selectedIndex,
-        onItemTapped: _onItemTapped,
-      ),
+      // bottomNavigationBar: MyBottomNavigationBar(
+      //   selectedIndex: _selectedIndex,
+      //   onItemTapped: _onItemTapped,
+      // ),
     );
   }
 
@@ -216,8 +216,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
     switch (index) {
       case 0:
         // Navigasi ke halaman Home
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => HomeScreen()));
+        // Navigator.push(
+        //     context, MaterialPageRoute(builder: (context) => HomeScreen()));
         break;
       case 1:
         // Navigasi ke halaman Medical Services

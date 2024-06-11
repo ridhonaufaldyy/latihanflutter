@@ -21,7 +21,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   String _password = '';
 
   Future<void> registerUser() async {
-    final url = Uri.parse('http://10.0.2.2:8000/users/'); // Ganti dengan URL API Anda
+    final url = Uri.parse('http://127.0.0.1:8000/users/'); // Ganti dengan URL API Anda
 
     final response = await http.post(
       url,
@@ -29,24 +29,41 @@ class _RegisterScreenState extends State<RegisterScreen> {
         'Content-Type': 'application/json',
       },
       body: jsonEncode({
-        'name': _name,
-        'nik': _nik,
-        'email': _email,
-        'phone_number': _phoneNumber,
         'username': _username,
         'password': _password,
+        'fullname': _name,
+        'nik': _nik,
+        'email': _email,
+        'telphone': _phoneNumber,
       }),
     );
 
     print('Response status: ${response.statusCode}');
     print('Response body: ${response.body}');
 
-    if (response.statusCode == 201) {
+    if (response.statusCode == 200) {
       // Berhasil
       print('User registered successfully');
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => LoginScreen()),
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Sukses"),
+            content: Text("Anda telah berhasil mendaftar"),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => LoginScreen()),
+                  );
+                },
+                child: Text('OK'),
+              ),
+            ],
+          );
+        },
       );
     } else {
       // Gagal
@@ -172,6 +189,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           ),
         ),
       ),
+      keyboardType: TextInputType.number, // Hanya menerima input angka
       validator: (value) {
         if (value == null || value.isEmpty) {
           return 'NIK harus diisi';
@@ -183,7 +201,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       },
     );
   }
-
+  
   Widget buildEmailField() {
     return TextFormField(
       decoration: InputDecoration(

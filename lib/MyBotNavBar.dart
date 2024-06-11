@@ -2,13 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:latihanflutter/JanjiTemu.dart';
 import 'package:latihanflutter/home_page.dart';
 import 'package:latihanflutter/obat.dart';
-import 'profilePage.dart';
+import 'package:latihanflutter/profilePage.dart';
 
 class MyBottomNavigationBar extends StatefulWidget {
   final int selectedIndex;
   final Function(int) onItemTapped;
+  final int userId;
+  final String token;
 
-  MyBottomNavigationBar({required this.selectedIndex, required this.onItemTapped});
+  MyBottomNavigationBar({
+    required this.selectedIndex,
+    required this.onItemTapped,
+    required this.userId,
+    required this.token,
+  });
 
   @override
   _MyBottomNavigationBarState createState() => _MyBottomNavigationBarState();
@@ -43,34 +50,38 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
       currentIndex: widget.selectedIndex,
       selectedItemColor: Color(0xFFFFD700), // Yellow color
       unselectedItemColor: Colors.white,
-      onTap: (index) {
-        // Panggil fungsi onTap yang disediakan oleh widget parent
+      onTap: (index) async {
         widget.onItemTapped(index);
-        
+
         // Navigasi ke halaman baru sesuai dengan index yang ditekan
         switch (index) {
           case 0:
+            // Navigasi ke HomeScreen, pastikan untuk meneruskan userId dan token
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => HomeScreen()), // Panggil constructor ProfilePage
-            );            break;
+              MaterialPageRoute(builder: (context) => HomeScreen(userId: widget.userId, token: widget.token)),
+            );
+            break;
           case 1:
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => MedicineSalesPage()), // Panggil constructor ProfilePage
-            );            break;
+              MaterialPageRoute(builder: (context) => MedicineSalesPage(
+              userId: widget.userId,
+              token: widget.token
+              )),
+            );
+            break;
           case 2:
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => JanjiTemu()), // Panggil constructor ProfilePage
-            );            break;
+            // Navigator.push(
+            //   context,
+            //   MaterialPageRoute(builder: (context) => JanjiTemuPage()),
+            // );
+            break;
           case 3:
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => ProfilePage()), // Panggil constructor ProfilePage
+              MaterialPageRoute(builder: (context) => ProfilePage(userId: widget.userId, token: widget.token)),
             );
-            break;
-          default:
             break;
         }
       },

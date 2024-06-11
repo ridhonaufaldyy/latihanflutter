@@ -36,10 +36,10 @@ class _NextPageState extends State<NextPage> {
     // Lakukan logika untuk mengirim alamat atau data yang diperlukan
     // setelah alamat di-submit
     // Kembali ke halaman home menggunakan pushReplacement
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => HomeScreen()),
-    );
+    // Navigator.pushReplacement(
+    //   context,
+    //   MaterialPageRoute(builder: (context) => HomeScreen()),
+    // );
   }
 
   @override
@@ -104,14 +104,14 @@ class _NextPageState extends State<NextPage> {
           ),
         ),
       ),
-      bottomNavigationBar: MyBottomNavigationBar(
-        selectedIndex: _selectedIndex,
-        onItemTapped: (index) {
-          setState(() {
-            _selectedIndex = index;
-          });
-        },
-      ),
+      // bottomNavigationBar: MyBottomNavigationBar(
+      //   selectedIndex: _selectedIndex,
+      //   onItemTapped: (index) {
+      //     setState(() {
+      //       _selectedIndex = index;
+      //     });
+      //   },
+      // ),
     );
   }
 }

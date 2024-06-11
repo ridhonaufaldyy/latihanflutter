@@ -70,28 +70,29 @@ class ArticleMataScreen extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: MyBottomNavigationBar(
-        // Tambahkan MyBottomNavigationBar di bottomNavigationBar
-        selectedIndex: 0, // Sesuaikan selectedIndex jika diperlukan
-        onItemTapped: (index) {
-          // Sesuaikan onItemTapped jika diperlukan
-          // Handle navigasi ketika item bottom navigation bar ditekan
-          // Contoh:
-          if (index == 0) {
-            Navigator.push(
-              // Navigasi ke halaman LoginScreen
-              context,
-              MaterialPageRoute(builder: (context) => HomeScreen()),
-            );          } else if (index == 1) {
-            // Jika index 1 (atau index untuk halaman 'Obat'), tidak ada tindakan khusus
-          } else if (index == 2) {
-            // Jika index 2 (atau index untuk halaman 'Healing'), tidak ada tindakan khusus
-          } else if (index == 3) {
-            // Jika index 3 (atau index untuk halaman 'Profile'), tidak ada tindakan khusus
-          }
-          // Tambahkan kondisi lain jika diperlukan
-        },
-      ),
+      // bottomNavigationBar: MyBottomNavigationBar(
+      //   // Tambahkan MyBottomNavigationBar di bottomNavigationBar
+      //   selectedIndex: 0, // Sesuaikan selectedIndex jika diperlukan
+      //   onItemTapped: (index) {
+      //     // Sesuaikan onItemTapped jika diperlukan
+      //     // Handle navigasi ketika item bottom navigation bar ditekan
+      //     // Contoh:
+      //     if (index == 0) {
+      //       // Navigator.push(
+      //       //   // Navigasi ke halaman LoginScreen
+      //       //   context,
+      //       //   MaterialPageRoute(builder: (context) => HomeScreen()),
+      //       // ); 
+      //                } else if (index == 1) {
+      //       // Jika index 1 (atau index untuk halaman 'Obat'), tidak ada tindakan khusus
+      //     } else if (index == 2) {
+      //       // Jika index 2 (atau index untuk halaman 'Healing'), tidak ada tindakan khusus
+      //     } else if (index == 3) {
+      //       // Jika index 3 (atau index untuk halaman 'Profile'), tidak ada tindakan khusus
+      //     }
+      //     // Tambahkan kondisi lain jika diperlukan
+      //   },
+      // ),
     );
   }
 

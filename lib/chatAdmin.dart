@@ -117,10 +117,10 @@ class _ChatAdminState extends State<ChatAdmin> {
           ],
         ),
       ),
-      bottomNavigationBar: MyBottomNavigationBar( 
-        selectedIndex: _selectedIndex,
-        onItemTapped: (index) => _onItemTapped(index),
-      ),
+      // bottomNavigationBar: MyBottomNavigationBar( 
+      //   selectedIndex: _selectedIndex,
+      //   onItemTapped: (index) => _onItemTapped(index),
+      // ),
     );
   }
 }

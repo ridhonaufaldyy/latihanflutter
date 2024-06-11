@@ -1,25 +1,32 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
-
-import '../MyBotNavBar.dart';
-import '../home_page.dart';
 import 'orderScreen.dart';
 
-// import '../widgets/RegistrationButtonWidget.dart';
-// import '../widgets/radioButtonWidget.dart';
-// import 'orderScreen.dart';
-
 class RegScreen extends StatefulWidget {
-  const RegScreen({Key? key}) : super(key: key);
+  final int userId;
+  final String token;
+  final int poliId;
+
+  RegScreen({
+    required this.userId,
+    required this.token,
+    required this.poliId,
+  });
+
 
   @override
   _RegScreenState createState() => _RegScreenState();
 }
 
 class _RegScreenState extends State<RegScreen> {
-  int _selectedIndex = 0;
+@override
+  void initState() {
+    super.initState();
+    print('userId: ${widget.userId}');
+    print('token: ${widget.token}');
+    print('poli id: ${widget.poliId}');
+
+  }
+  // int _selectedIndex = 0;
   int _selectedTimeSlot = 0;
   String? _selectedCategory;
   String? _selectedDoctor;
@@ -302,7 +309,7 @@ class _RegScreenState extends State<RegScreen> {
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(12))),
                                       labelStyle: TextStyle(
-                                          color: Colors
+                                          color:Colors
                                               .grey), // Set label text color
                                       hintStyle: TextStyle(
                                           color:
@@ -419,36 +426,7 @@ class _RegScreenState extends State<RegScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: MyBottomNavigationBar(
-        selectedIndex: _selectedIndex,
-        onItemTapped: _onItemTapped,
-      ),
     );
-  }
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-
-    switch (index) {
-      case 0:
-        // Navigasi ke halaman Home
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => HomeScreen()));
-        break;
-      case 1:
-        // Navigasi ke halaman Medical Services
-        Navigator.pushNamed(context, '/medical_services');
-        break;
-      case 2:
-        // Navigasi ke halaman Healing
-        Navigator.pushNamed(context, '/healing');
-        break;
-      case 3:
-        // Tidak perlu melakukan navigasi karena sudah berada di halaman Profile
-        break;
-    }
   }
 }
 
@@ -476,20 +454,23 @@ class RegistrationNext extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => OrderScreen(
-              category: selectedCategory,
-              name: name,
-              phoneNumber: phoneNumber,
-              address: address,
-              doctorName: doctorName,
-              schedule: schedule,
-              complaint: complaint,
-            ),
-          ),
-        );
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(
+        //     builder: (context) => OrderScreen(
+        //       userId: widget.userId,
+        //       token: widget.token,
+        //       poliId: widget.poliId,
+        //       category: selectedCategory,
+        //       name: name,
+        //       phoneNumber: phoneNumber,
+        //       address: address,
+        //       doctorName: doctorName,
+        //       schedule: schedule,
+        //       complaint: complaint,
+        //     ),
+        //   ),
+        // );
       },
       child: Padding(
         padding: const EdgeInsets.only(top: 12.0),

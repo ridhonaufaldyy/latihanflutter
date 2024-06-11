@@ -108,10 +108,10 @@ class _PhoneCallScreenState extends State<PhoneCallScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: MyBottomNavigationBar(
-        selectedIndex: _selectedIndex,
-        onItemTapped: _onItemTapped,
-      ),
+      // bottomNavigationBar: MyBottomNavigationBar(
+      //   selectedIndex: _selectedIndex,
+      //   onItemTapped: _onItemTapped,
+      // ),
     );
   }
 
@@ -123,7 +123,7 @@ class _PhoneCallScreenState extends State<PhoneCallScreen> {
     switch (index) {
       case 0:
         // Navigasi ke halaman Home
-        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
+        // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
         break;
       case 1:
         // Navigasi ke halaman Medical Services
